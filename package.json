@@ -9,6 +9,14 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "codegenConfig": {
+    "name": "TurboModulesExampleSpec",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.turbomodulesexample"
+    }
+  },
   "dependencies": {
     "react": "18.3.1",
     "react-native": "0.76.6"
