@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader
 
 import com.turbomodulesexample.NativeLocalStoragePackage
 import com.turbomodulesexample.NativeInstalledAppsPackage
+import com.turbomodulesexample.NativeAppScreenTimePackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -23,6 +24,7 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
               add(NativeLocalStoragePackage())
               add(NativeInstalledAppsPackage())
+              add(NativeAppScreenTimePackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

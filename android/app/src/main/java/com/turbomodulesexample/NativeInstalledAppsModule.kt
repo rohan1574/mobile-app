@@ -1,6 +1,7 @@
 package com.turbomodulesexample
 
 import android.content.pm.PackageManager
+import android.content.pm.ApplicationInfo
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
@@ -21,9 +22,9 @@ class NativeInstalledAppsModule(reactContext: ReactApplicationContext) : NativeI
     val appsList: WritableArray = Arguments.createArray()
 
     for (packageInfo in packages) {
-      if( (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM) ){
-        continue;
-      }
+      // if( (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM) ){
+      //   continue;
+      // }
       val app: WritableMap = Arguments.createMap()
       app.putString("appName", pm.getApplicationLabel(packageInfo).toString())
       app.putString("packageName", packageInfo.packageName)

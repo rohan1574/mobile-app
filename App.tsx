@@ -1,44 +1,70 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
+  Linking,
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   FlatList,
   View
 } from 'react-native';
 
 import NativeLocalStorage from './specs/NativeLocalStorage';
 import NativeInstalledApps from './specs/NativeInstalledApps';
+import NativeAppScreenTime from './specs/NativeAppScreenTime';
 
-// const EMPTY = '<empty>';
+const openApp = (packageName: string) => {
+  Linking.openURL(`intent://${packageName}#Intent;scheme=package;end;`)
+    .catch((err) => console.error('Failed to open app:', err));
+};
 
-function App(): React.JSX.Element {
-  const [appList, setAppList] = React.useState<Array<{ appName: string; packageName: string; isSystemApp: boolean }>>([]);
-  // const [editingValue, setEditingValue] = React.useState<
-  //   string | null
-  // >(null);
+const App = () => {
+  const [selectedId, setSelectedId] = useState<string>();
+  const [appList, setAppList] = useState<Array<{ appName: string; packageName: string; isSystemApp: boolean }>>([]);
 
   async function fetchInstalledApps() {
     try {
       const apps = await NativeInstalledApps.getInstalledApps();
+      console.log(apps);
       setAppList(apps);
     } catch (error) {
       console.error('Error fetching installed apps:', error);
     }
   }
 
-  React.useEffect(() => {
-    // const storedValue = NativeLocalStorage?.getItem('myKey');
-    // setValue(storedValue ?? '');
+  async function fetchAppsScreenTime() {
+    try {
+      const screenTime = await NativeAppScreenTime.getAllAppsScreenTime();
+      // console.log('Screen time for all apps:', screenTime);
+    } catch (error) {
+      console.error('Failed to get screen time for all apps:', error);
+    }
+  }
 
+  useEffect(() => {
     fetchInstalledApps();
+    fetchAppsScreenTime();
   }, []);
 
-  const Item = ({appName}: { appName: string }) => (
-    <View style={styles.item}>
-      <Text style={styles.text}>{appName}</Text>
-    </View>
+  const Item = ({item, onPress, backgroundColor, textColor}: any) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
+      <Text style={[styles.item, {color: textColor}]}>{item.appName}</Text>
+    </TouchableOpacity>
   );
+
+  const renderItem = ({item}: {item: any}) => {
+    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+    const color = item.id === selectedId ? 'white' : 'black';
+
+    return (
+      <Item
+        item={item}
+        onPress={() => openApp(item.packageName)}
+        backgroundColor={backgroundColor}
+        textColor={color}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -47,7 +73,7 @@ function App(): React.JSX.Element {
           <Text style={styles.sectionTitle}>Installed Applications</Text>
           <FlatList
             data={appList}
-            renderItem={({item}) => <Item appName={item.appName} />}
+            renderItem={renderItem}
             keyExtractor={item => item.packageName}
           />
         </View>
