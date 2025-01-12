@@ -35,7 +35,7 @@ const App = () => {
   async function fetchAppsScreenTime() {
     try {
       const screenTime = await NativeAppScreenTime.getAllAppsScreenTime();
-      // console.log('Screen time for all apps:', screenTime);
+      console.log('Screen time for all apps:', screenTime);
     } catch (error) {
       console.error('Failed to get screen time for all apps:', error);
     }
