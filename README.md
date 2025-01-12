@@ -9,9 +9,10 @@ git clone git@github.com:zakirsujon/turbomodulesexample.git
 # Package Install
 npm install
 
-# Andoid Codegen
+# Android Codegen
 cd android
 ./gradlew generateCodegenArtifactsFromSchema
+cd ..
 
 # Start
 npx react-native run-android
