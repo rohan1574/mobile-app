@@ -98,7 +98,7 @@ const App = () => {
         data={filteredData}
         renderItem={renderApp}
         keyExtractor={(item, index) => `${item.appName}-${index}`}
-        contentContainerStyle={tw`p-4 pb-16`} // Padding for the list
+        contentContainerStyle={tw`p-4 pb-16`} // Padding for the lists
         showsVerticalScrollIndicator={false}
       />
 
