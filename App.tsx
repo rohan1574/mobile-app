@@ -69,7 +69,7 @@ const App = () => {
   };
 
   return (
-    <View style={[tw`flex-1 `,{backgroundColor:'#000000'}]}>
+    <View style={[tw`flex-1 `,{backgroundColor:'#1F2630'}]}>
       {/* Static Header */}
       <View style={tw`px-4 py-2 `}>
         {/* Search Bar */}
@@ -88,7 +88,7 @@ const App = () => {
         <View style={tw`flex-row justify-between items-center`}>
           <Text style={[tw` text-lg font-semibold`,{color:"#ECEDF0"}]}>All Apps</Text>
           <TouchableOpacity onPress={() => console.log('Settings pressed')}>
-            <Icon name="settings-outline" size={22} color="#ECEDF0" />
+            <Icon name="settings-sharp" size={22} color="#ECEDF0" />
           </TouchableOpacity>
         </View>
       </View>
@@ -104,17 +104,17 @@ const App = () => {
 
       {/* Bottom Navigation */}
       <View style={tw`absolute bottom-0 left-0 w-full bg-gray-900 h-12 flex-row justify-around items-center border-t border-gray-700`}>
-        <TouchableOpacity style={tw`items-center`}>
+      <TouchableOpacity style={tw`items-center`}>
           <Icon name="home-outline" size={24} color="#ECEDF0" />
           <Text style={tw`text-gray-300 text-xs`}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={tw`items-center`}>
-          <Icon name="search-outline" size={24} color="#ECEDF0" />
-          <Text style={tw`text-gray-300 text-xs`}>Search</Text>
+          <Icon name="arrow-back-outline" size={24} color="#ECEDF0" />
+          <Text style={tw`text-gray-300 text-xs`}>Back</Text>
         </TouchableOpacity>
         <TouchableOpacity style={tw`items-center`}>
-          <Icon name="person-outline" size={24} color="#ECEDF0" />
-          <Text style={tw`text-gray-300 text-xs`}>Profile</Text>
+          <Icon name="ellipsis-horizontal-outline" size={24} color="#ECEDF0" />
+          <Text style={tw`text-gray-300 text-xs`}>Recent</Text>
         </TouchableOpacity>
       </View>
     </View>
