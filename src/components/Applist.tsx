@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Linking, ScrollView } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Linking } from 'react-native';
 import { s as tw } from 'react-native-wind';
-import NativeInstalledApps from '../../specs/NativeInstalledApps'; // For fetching installed apps.
-import NativeAppScreenTime from '../../specs/NativeAppScreenTime'; // For fetching screen time.
+import Icon from 'react-native-vector-icons/Ionicons';
+import NativeInstalledApps from '../../specs/NativeInstalledApps';
+import NativeAppScreenTime from '../../specs/NativeAppScreenTime';
 
 const openApp = (packageName: string) => {
-  Linking.openURL(`intent://${packageName}#Intent;scheme=package;end;`)
-    .catch((err) => console.error('Failed to open app:', err));
+  Linking.openURL(`intent://${packageName}#Intent;scheme=package;end;`).catch((err) =>
+    console.error('Failed to open app:', err)
+  );
 };
 
-const App = () => {
+const AppList = () => {
   const [searchText, setSearchText] = useState('');
   const [appList, setAppList] = useState<Array<{ appName: string; packageName: string; isSystemApp: boolean }>>([]);
   const [screenTimeData, setScreenTimeData] = useState<Array<{ appName: string; screenTime: string }>>([]);
@@ -52,36 +54,71 @@ const App = () => {
     app.appName.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  const renderApp = ({ item }: { item: { appName: string; screenTime: string } }) => (
-    <View style={tw`bg-gray-600 p-2 rounded-full mb-2  flex-row justify-between items-center`}>
-      <Text style={tw`text-gray-200 text-base ml-2`}>{item.appName}</Text>
-      <Text style={tw`text-gray-200 text-sm`}>Lo: {item.screenTime}</Text>
-    </View>
-  );
+  const renderApp = ({ item }: { item: { appName: string; screenTime: string } }) => {
+    const truncatedAppName =
+      item.appName.length > 10 ? `${item.appName.slice(0, 15)}...` : item.appName;
+
+    return (
+      <View style={[tw` p-2 rounded-full mb-2 flex-row justify-between items-center`,{backgroundColor:'#434C5B'}]}>
+        <Text style={[tw`text-base ml-2`,{color:"#ECEDF0"}]}>{truncatedAppName}</Text>
+        <Text style={[tw`text-xs font-light mr-2 `,{color:"#ECEDF0"}]}>
+          LO: {item.screenTime} || DU: 10min
+        </Text>
+      </View>
+    );
+  };
 
   return (
-    <ScrollView style={[tw`flex-1  p-4`, {backgroundColor: '#1F2630'}]}>
-      <View style={[tw` flex-row items-center border border-gray-200 rounded-full mb-2`,{backgroundColor: '#1F2630'}]}>
-        <TextInput
-          placeholder="Search app here"
-          placeholderTextColor="#858E9D"
-          style={tw`text-white flex-1 text-base font-light ml-2`}
-          value={searchText}
-          onChangeText={setSearchText}
-        />
+    <View style={[tw`flex-1 `,{backgroundColor:'#1F2630'}]}>
+      {/* Static Header */}
+      <View style={tw`px-4 py-2 `}>
+        {/* Search Bar */}
+        <View style={[tw`flex-row items-center rounded-full mb-4  px-4`, { borderColor: '#858E9D', borderWidth: 1 }]}>
+          <Icon name="search-outline" size={20} color="#858E9D" style={tw`mr-2`} />
+          <TextInput
+            placeholder="Search app here"
+            placeholderTextColor="#858E9D"
+            style={tw`text-white flex-1 text-base`}
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+        </View>
+
+        {/* Header Title */}
+        <View style={tw`flex-row justify-between items-center`}>
+          <Text style={[tw` text-lg font-semibold`,{color:"#ECEDF0"}]}>All Apps</Text>
+          <TouchableOpacity onPress={() => console.log('Settings pressed')}>
+            <Icon name="settings-sharp" size={22} color="#ECEDF0" />
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <Text style={tw`text-gray-200 text-lg ml-2 font-semibold mb-4`}>All Apps</Text>
-
+      {/* Scrollable App List */}
       <FlatList
         data={filteredData}
         renderItem={renderApp}
         keyExtractor={(item, index) => `${item.appName}-${index}`}
+        contentContainerStyle={tw`p-4 pb-16`} // Padding for the lists
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={tw`pb-6`}
       />
-    </ScrollView>
+
+      {/* Bottom Navigation */}
+      <View style={tw`absolute bottom-0 left-0 w-full bg-gray-900 h-12 flex-row justify-around items-center border-t border-gray-700`}>
+      <TouchableOpacity style={tw`items-center`}>
+          <Icon name="home-outline" size={24} color="#ECEDF0" />
+          <Text style={tw`text-gray-300 text-xs`}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={tw`items-center`}>
+          <Icon name="arrow-back-outline" size={24} color="#ECEDF0" />
+          <Text style={tw`text-gray-300 text-xs`}>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={tw`items-center`}>
+          <Icon name="ellipsis-horizontal-outline" size={24} color="#ECEDF0" />
+          <Text style={tw`text-gray-300 text-xs`}>Recent</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
-export default App;
+export default AppList;
