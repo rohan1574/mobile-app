@@ -22,9 +22,10 @@ class NativeInstalledAppsModule(reactContext: ReactApplicationContext) : NativeI
     val appsList: WritableArray = Arguments.createArray()
 
     for (packageInfo in packages) {
-      // if( (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM) ){
-      //   continue;
-      // }
+      if( (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0 ){
+        continue;
+      }
+
       val app: WritableMap = Arguments.createMap()
       app.putString("appName", pm.getApplicationLabel(packageInfo).toString())
       app.putString("packageName", packageInfo.packageName)
