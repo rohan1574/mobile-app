@@ -1,62 +1,106 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
-import {s as tw} from 'react-native-wind';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { s as tw } from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Slider} from '@miblanchard/react-native-slider';
+import { Slider } from '@miblanchard/react-native-slider';
+import NativeBatteryStatus from './specs/NativeBatteryStatus'; // Importing native battery status
+import moment from 'moment'; // Moment.js for time/date formatting
 
 const App = () => {
+  const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    // Fetch battery status from the native module
+    NativeBatteryStatus.getBatteryLevel()
+      .then(level => setBatteryLevel(level))
+      .catch(err => console.error('Failed to fetch battery level:', err));
+  }, []);
+
+  // Determine icon based on battery level
+  const getBatteryIcon = (level: number | null) => {
+    if (level === null) return 'battery-unknown';
+    if (level >= 75) return 'battery-full';
+    if (level >= 50) return 'battery-half';
+    if (level >= 25) return 'battery-low';
+    return 'battery-dead';
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(moment().format('HH:mm:ss'));
+      setCurrentDate(moment().format('dddd, MMMM Do YYYY'));
+    }, 1000); // Update every second
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
   return (
-    <SafeAreaView style={[tw`flex-1 `, {backgroundColor: '#1F2630'}]}>
+    <SafeAreaView style={[tw`flex-1`, { backgroundColor: '#1F2630' }]}>
       {/* Top Section */}
-      <View style={tw`flex-1 justify-center items-center `}>
+      <View style={tw`flex-1 justify-center items-center`}>
         <Text
           style={[
-            tw` font-normal`,
+            tw`font-normal`,
             {
-              fontSize: 32, // Use a numeric value (no "px")
+              fontSize: 32,
               color: '#ECEDF0',
               fontFamily: 'Roboto',
-              fontStyle: 'normal', // This is valid
-              fontWeight: '400', // Matches `font-normal`
-              lineHeight: 38, // Use a numeric value for lineHeight
-              letterSpacing: -0.96, // Numeric value for letterSpacing
+              fontWeight: '400',
+              lineHeight: 38,
+              letterSpacing: -0.96,
             },
-          ]}>
-          20:54
+          ]}
+        >
+          {currentTime} {/* Display current time */}
         </Text>
 
         <Text
           style={[
-            tw` font-normal`,
+            tw`font-normal`,
             {
               color: '#ECEDF0',
               fontSize: 14,
               fontFamily: 'Roboto',
-              fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: 16, // Use a numeric value; adjust as needed based on design
+              lineHeight: 16,
             },
-          ]}>
-          Tuesday, 10th June
+          ]}
+        >
+          {currentDate} {/* Display current date */}
         </Text>
 
-        {/* Vector Battery Icon */}
+        {/* Battery Icon with Dynamic Status */}
         <Icon
-          name="battery-half" // Options: "battery-full", "battery-empty", etc.
-          size={24} // Adjust size as needed
-          color="#9CA3AF" // Tailwind's gray-400
+          name={getBatteryIcon(batteryLevel)}
+          size={24}
+          color="#9CA3AF"
           style={tw`mt-2`}
         />
+        <Text
+          style={[
+            tw`font-normal mt-1`,
+            {
+              fontSize: 14,
+              color: '#ECEDF0',
+              fontFamily: 'Roboto',
+              fontWeight: '400',
+              lineHeight: 16,
+            },
+          ]}>
+          {batteryLevel !== null ? `${batteryLevel}%` : 'Fetching...'}
+        </Text>
       </View>
 
-      {/* App Buttons (Moved Up) */}
-      <View style={tw`flex-1 justify-start items-center `}>
+      {/* App Buttons */}
+      <View style={tw`flex-1 justify-start items-center`}>
         {['Calendar', 'WhatsApp', 'Messenger'].map(app => (
           <TouchableOpacity
             key={app}
             style={[
               tw`w-4/5 py-3 my-2 rounded-full border items-center`,
-              {borderColor: '#858E9D'},
+              { borderColor: '#858E9D' },
             ]}>
             <Text
               style={[
@@ -64,10 +108,9 @@ const App = () => {
                 {
                   color: '#ECEDF0',
                   fontFamily: 'Roboto',
-                  fontStyle: 'normal',
                   fontWeight: '400',
-                  lineHeight: 22, // Use a numeric value; adjust as needed
-                  letterSpacing: -0.54, // Use a numeric value for letter spacing
+                  lineHeight: 22,
+                  letterSpacing: -0.54,
                 },
               ]}>
               {app}
@@ -75,7 +118,7 @@ const App = () => {
           </TouchableOpacity>
         ))}
 
-        {/* Add Button (Moved Up) */}
+        {/* Add Button */}
         <TouchableOpacity style={tw`p-3 rounded-full`}>
           <Icon
             name="add-circle-outline"
@@ -86,21 +129,20 @@ const App = () => {
         </TouchableOpacity>
         <Text
           style={[
-            tw` font-normal`,
+            tw`font-normal`,
             {
               color: '#434C5B',
               fontSize: 14,
               fontFamily: 'Roboto',
-              fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: 16, // Approximate; adjust as needed
+              lineHeight: 16,
             },
           ]}>
           Don't add unnecessary addictive apps!
         </Text>
       </View>
 
-      {/* Progress Section (Moved Up) */}
+      {/* Progress Section */}
       <View style={tw`flex-1 justify-center px-4 mb-20`}>
         <Text
           style={[
@@ -108,9 +150,8 @@ const App = () => {
             {
               color: '#ECEDF0',
               fontFamily: 'Roboto',
-              fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: 16, // Approximate; adjust as needed for better spacing
+              lineHeight: 16,
             },
           ]}>
           Overall Ranking
@@ -130,9 +171,8 @@ const App = () => {
             {
               color: '#858E9D',
               fontFamily: 'Roboto',
-              fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: 16, // Approximate; adjust as needed
+              lineHeight: 16,
             },
           ]}>
           Today Unlock: 5 || Today Use: 120 M
@@ -144,9 +184,8 @@ const App = () => {
             {
               color: '#434C5B',
               fontFamily: 'Roboto',
-              fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: 16, // Approximate; adjust as necessary
+              lineHeight: 16,
             },
           ]}>
           Use less to increase progress bar
@@ -154,21 +193,20 @@ const App = () => {
       </View>
 
       {/* Bottom Navigation */}
-      <View
-        style={tw`absolute bottom-0  flex-row justify-center w-full py-4 px-2 mb-10`}>
+      <View style={tw`absolute bottom-0 flex-row justify-center w-full py-4 px-2 mb-10`}>
         <TouchableOpacity
           style={[
-            tw`flex-1 items-center  py-3 border border-gray-700 mx-1`, // mx-2 for gap
-            {borderTopLeftRadius: 50, borderBottomLeftRadius: 50,backgroundColor:'#29313C'},
+            tw`flex-1 items-center py-3 border border-gray-700 mx-1`,
+            { borderTopLeftRadius: 50, borderBottomLeftRadius: 50, backgroundColor: '#29313C' },
           ]}>
-          <Text style={[tw` text-lg`,{color:'#ECEDF0'}]}>Camera</Text>
+          <Text style={[tw`text-lg`, { color: '#ECEDF0' }]}>Camera</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
-            tw`flex-1 items-center py-3 border border-gray-700 mx-1`, // mx-2 for gap
-            {borderTopRightRadius: 50, borderBottomRightRadius: 50,backgroundColor:'#29313C'},
+            tw`flex-1 items-center py-3 border border-gray-700 mx-1`,
+            { borderTopRightRadius: 50, borderBottomRightRadius: 50, backgroundColor: '#29313C' },
           ]}>
-          <Text style={[tw` text-lg`,{color:'#ECEDF0'}]}>Dialer</Text>
+          <Text style={[tw`text-lg`, { color: '#ECEDF0' }]}>Dialer</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

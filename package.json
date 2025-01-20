@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.6.0",
+    "moment": "^2.30.1",
     "react": "18.3.1",
     "react-icons": "^5.4.0",
     "react-native": "0.76.6",
