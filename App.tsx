@@ -1,349 +1,209 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
-  Modal, // Import Modal here
-  FlatList, // Import FlatList here
+  TextInput,
+  ScrollView,
+  Switch,
 } from 'react-native';
-import { s as tw } from 'react-native-wind';
+import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Slider } from '@miblanchard/react-native-slider';
-import NativeBatteryStatus from './specs/NativeBatteryStatus'; // Importing native battery status
-import moment from 'moment'; // Moment.js for time/date formatting
-import NativeInstalledApps from './specs/NativeInstalledApps';
-import { launchCamera } from 'react-native-image-picker'; // For Camera
-import { Linking } from 'react-native'; // For Dialer
-import { Alert } from 'react-native';
 
-const HomeScreen = () => {
-  const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
-  const [currentTime, setCurrentTime] = useState('');
-  const [currentDate, setCurrentDate] = useState('');
-  const [showAppList, setShowAppList] = useState(false); // Modal toggle state
-  const [appList, setAppList] = useState<
-    Array<{ appName: string; packageName: string; isSystemApp: boolean }>
-  >([]);
-  const [selectedApps, setSelectedApps] = useState<
-  { appName: string; packageName: string; isSystemApp: boolean }[]
->([]);
+const SettingsScreen = () => {
+  const [sections, setSections] = useState({
+    homeScreen: true,
+    display: false,
+    gestures: false,
+    inAppTimeReminder: false,
+    notificationFilter: false,
+    realSupport: false,
+    premiumAccount: false,
+  });
 
-  // Fetch installed apps
-  const fetchInstalledApps = async () => {
-    try {
-      const apps = await NativeInstalledApps.getInstalledApps();
-      setAppList(apps);
-    } catch (error) {
-      console.error('Error fetching installed apps:', error);
-    }
-  };
-
-  const handleAddPress = () => {
-    fetchInstalledApps(); // Fetch apps when Add button is clicked
-    setShowAppList(true); // Show the modal
-  };
-
-   // Handle App Selection
-   const handleAppSelect = (app: {
-    appName: string;
-    packageName: string;
-    isSystemApp: boolean;
-  }) => {
-    // Check if the limit of 3 apps is reached
-    if (selectedApps.length >= 3) {
-      Alert.alert('Limit Reached', 'You can only select up to 3 apps.'); // Use Alert here
-      return;
-    }
-  
-    // Check if the app is already selected
-    const alreadySelected = selectedApps.find(
-      (selectedApp) => selectedApp.packageName === app.packageName
-    );
-    if (!alreadySelected) {
-      setSelectedApps([...selectedApps, app]);
-    }
-  
-    // Close the modal
-    setShowAppList(false);
-  };
-  
-
-  useEffect(() => {
-    // Fetch battery status from the native module
-    NativeBatteryStatus.getBatteryLevel()
-      .then((level) => setBatteryLevel(level))
-      .catch((err) => console.error('Failed to fetch battery level:', err));
-  }, []);
-
-  // Determine icon based on battery level
-  const getBatteryIcon = (level: number | null) => {
-    if (level === null) {
-      return 'battery-charging-outline';
-    }
-    if (level >= 75) return 'battery-full';
-    if (level >= 50) return 'battery-half';
-    if (level >= 25) return 'battery-half';
-    return 'battery-dead-outline';
-  };
-  
-
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(moment().format('hh:mm:ss A'));
-      setCurrentDate(moment().format('dddd, D-M-YYYY'));
-    }, 1000); // Update every second
-
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, []);
-
- 
-  // Open Camera Function
-  const openCamera = () => {
-    const options = {
-      mediaType: 'photo' as const,  // Use 'photo', 'video', or 'mixed' as valid types
-      cameraType: 'back' as 'front' | 'back', // Set camera type to either 'front' or 'back'
-    };
-  
-    launchCamera(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorCode) {
-        console.error('Error: ', response.errorMessage);
-      } else {
-        console.log('Photo taken: ', response.assets);
-      }
-    });
-  };
-
-  // Open Dialer Function
-  const openDialer = (phoneNumber = '') => {
-    const phoneUrl = `tel:${phoneNumber}`;
-    Linking.openURL(phoneUrl).catch(err => {
-      console.error('Failed to open dialer:', err);
-    });
+  const toggleSection = (section: keyof typeof sections) => {
+    setSections(prev => ({...prev, [section]: !prev[section]}));
   };
 
   return (
-    <SafeAreaView style={[tw`flex-1`, { backgroundColor: '#1F2630' }]}>
-      {/* Top Section */}
-      <View style={tw`flex-1 justify-center items-center`}>
-        <Text
-          style={[
-            tw`font-normal`,
-            {
-              fontSize: 32,
-              color: '#ECEDF0',
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 38,
-              letterSpacing: -0.96,
-            },
-          ]}
-        >
-          {currentTime} {/* Display current time */}
-        </Text>
-
-        <Text
-          style={[
-            tw`font-normal`,
-            {
-              color: '#ECEDF0',
-              fontSize: 14,
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}
-        >
-          {currentDate} {/* Display current date */}
-        </Text>
-
-        {/* Battery Icon with Dynamic Status */}
-        <Icon name={getBatteryIcon(batteryLevel)} size={30} color="#ECEDF0" />
-
-
-        <Text
-          style={[
-            tw`font-normal mt-1`,
-            {
-              fontSize: 14,
-              color: '#ECEDF0',
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}
-        >
-          {batteryLevel !== null ? `${batteryLevel}%` : 'Fetching...'}
-        </Text>
-      </View>
-
-      {/* App Buttons */}
-      <View style={tw`flex-2 justify-start items-center`}>
-        {selectedApps.map((app) => (
-          <TouchableOpacity
-            key={app.packageName}
-            style={[
-              tw`w-4/5 py-3 my-2 rounded-full border items-center`,
-              { borderColor: '#858E9D' },
-            ]}
-          >
-            <Text
-              style={[tw`text-lg`, { color: '#ECEDF0', fontWeight: '400' }]}
-            >
-              {app.appName}
-            </Text>
-          </TouchableOpacity>
-        ))}
-
-        {/* Add Button */}
-        <TouchableOpacity style={tw`p-3 rounded-full`} onPress={handleAddPress}>
-          <Icon
-            name="add-circle-outline"
-            size={40}
-            color="#434C5B"
-            style={tw``}
-          />
+    <View style={tw`flex-1 bg-gray-900`}>
+      {/* Header */}
+      <View
+        style={tw`flex-row items-center justify-between px-4 py-3 bg-gray-800`}>
+        <TouchableOpacity>
+          <Icon name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-      
-
-        {/* Modal to show App List */}
-        <Modal
-          visible={showAppList}
-          animationType="slide"
-          onRequestClose={() => setShowAppList(false)} // Close the modal
-          transparent={false}
-        >
-          <View style={[tw`flex-1`, { backgroundColor: '#1F2630' }]}>
-            {/* Header */}
-            <View style={tw`px-4 py-4`}>
-              <Text style={[tw`text-lg text-white font-semibold`]}>
-                Installed Apps
-              </Text>
-            </View>
-
-            {/* App List */}
-            <FlatList
-              data={appList}
-              keyExtractor={(item) => item.packageName}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={[
-                    tw`flex-row items-center justify-between px-4 py-2`,
-                    { backgroundColor: '#434C5B', marginVertical: 4 },
-                  ]}
-                  onPress={() => handleAppSelect(item)} // Handle app selection
-                >
-                  <Text style={[tw`text-white`]}>{item.appName}</Text>
-                </TouchableOpacity>
-              )}
-              contentContainerStyle={tw`px-4 pb-16`}
-            />
-
-            {/* Close Button */}
-            <TouchableOpacity
-              style={[
-                tw`p-3 rounded-full bg-gray-800 absolute bottom-5 left-1/2`,
-                { transform: [{ translateX: -50 }] },
-              ]}
-              onPress={() => setShowAppList(false)}
-            >
-              <Icon name="close" size={30} color="#ECEDF0" />
-            </TouchableOpacity>
-          </View>
-        </Modal>
-    
-        <Text
-          style={[
-            tw`font-normal`,
-            {
-              color: '#434C5B',
-              fontSize: 14,
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}>
-          Don't add unnecessary addictive apps!
-        </Text>
+        <Text style={tw`text-white text-lg font-semibold`}>Settings</Text>
+        <Icon name="search" size={24} color="white" />
       </View>
 
-      {/* Progress Section */}
-      <View style={tw`flex-1 justify-center px-4 mb-20`}>
-        <Text
-          style={[
-            tw`text-center text-sm font-normal mb-2`,
-            {
-              color: '#ECEDF0',
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}>
-          Overall Ranking
-        </Text>
-
-        <Slider
-          value={70}
-          minimumValue={0}
-          maximumValue={100}
-          thumbTintColor="#ECEDF0"
-          minimumTrackTintColor="#495057"
-          maximumTrackTintColor="#495057"
+      {/* Search Bar */}
+      <View style={tw`p-4`}>
+        <TextInput
+          placeholder="Search settings..."
+          placeholderTextColor="#aaa"
+          style={tw`bg-gray-800 text-white p-3 rounded-lg`}
         />
-        <Text
-          style={[
-            tw`text-center text-sm font-normal`,
-            {
-              color: '#858E9D',
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}>
-          Today Unlock: 5 || Today Use: 120 M
-        </Text>
-
-        <Text
-          style={[
-            tw`text-center mt-2 text-sm font-normal`,
-            {
-              color: '#434C5B',
-              fontFamily: 'Roboto',
-              fontWeight: '400',
-              lineHeight: 16,
-            },
-          ]}>
-          Use less to increase progress bar
-        </Text>
       </View>
 
-      {/* Bottom Navigation */}
-      <View style={tw`absolute bottom-0 flex-row justify-center w-full py-4 px-2 mb-10`}>
-        {/* Camera Button */}
+      {/* Scrollable Sections */}
+      <ScrollView style={tw`flex-1 px-4`}>
+        {/* Home Screen */}
         <TouchableOpacity
-          style={[
-            tw`flex-1 items-center py-3 border border-gray-700 mx-1`,
-            { borderTopLeftRadius: 50, borderBottomLeftRadius: 50, backgroundColor: '#29313C' },
-          ]}
-          onPress={openCamera}>
-          <Text style={[tw`text-lg`, { color: '#ECEDF0' }]}>Camera</Text>
+          onPress={() => toggleSection('homeScreen')}
+          style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold`}>Home Screen</Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
         </TouchableOpacity>
+        {sections.homeScreen && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            {['Phone Dialer Icon', 'Camera Icon', 'Alarm Clock Icon'].map(
+              (item, index) => (
+                <View
+                  key={index}
+                  style={tw`flex-row justify-between items-center mb-2`}>
+                  <Text style={tw`text-white`}>{item}</Text>
+                  <Switch value={false} />
+                </View>
+              ),
+            )}
+          </View>
+        )}
 
-        {/* Dialer Button */}
-        <TouchableOpacity
-          style={[
-            tw`flex-1 items-center py-3 border border-gray-700 mx-1`,
-            { borderTopRightRadius: 50, borderBottomRightRadius: 50, backgroundColor: '#29313C' },
-          ]}
-          onPress={() => openDialer('')}>
-          <Text style={[tw`text-lg`, { color: '#ECEDF0' }]}>Dialer</Text>
+        {/* Display Section */}
+        <TouchableOpacity onPress={() => toggleSection('display')} style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>Display</Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
         </TouchableOpacity>
+        {sections.display && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            <View style={tw`flex-row justify-between items-center mb-3`}>
+              <Text style={tw`text-white`}>Font Selection</Text>
+              <Text style={tw`text-gray-400`}>Default</Text>
+            </View>
+            <View style={tw`flex-row justify-between items-center mb-3`}>
+              <Text style={tw`text-white`}>Font Size</Text>
+              <Text style={tw`text-gray-400`}>Medium</Text>
+            </View>
+            <View style={tw`flex-row justify-between items-center`}>
+              <Text style={tw`text-white`}>Color Theme</Text>
+              <Text style={tw`text-gray-400`}>System</Text>
+            </View>
+          </View>
+        )}
+
+        {/* Gestures Section */}
+        <TouchableOpacity onPress={() => toggleSection('gestures')}  style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>
+            Gestures
+          </Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
+        </TouchableOpacity>
+        {sections.gestures && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            {[
+              'Swipe down to see notification',
+              'Swipe up to open search',
+              "Draw 'M' to see hidden apps",
+            ].map((item, index) => (
+              <View
+                key={index}
+                style={tw`flex-row justify-between items-center mb-2`}>
+                <Text style={tw`text-white`}>{item}</Text>
+                <Switch value={false} />
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* In-App Time Reminder Section */}
+        <TouchableOpacity onPress={() => toggleSection('inAppTimeReminder')} style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>
+            In-App Time Reminder
+          </Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
+        </TouchableOpacity>
+        {sections.inAppTimeReminder && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            <View style={tw`flex-row justify-between items-center mb-2`}>
+              <Text style={tw`text-white`}>Activate App Time Reminder</Text>
+              <Switch value={false} />
+            </View>
+          </View>
+        )}
+
+        {/* Notification Filter Section */}
+        <TouchableOpacity onPress={() => toggleSection('notificationFilter')} style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>
+            Notification Filter
+          </Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
+        </TouchableOpacity>
+        {sections.notificationFilter && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            {['My Airtel', 'Contact', 'Al Hadith', 'Al Quran'].map(
+              (item, index) => (
+                <View
+                  key={index}
+                  style={tw`flex-row justify-between items-center mb-2`}>
+                  <Text style={tw`text-white`}>{item}</Text>
+                  <Switch value={false} />
+                </View>
+              ),
+            )}
+          </View>
+        )}
+
+        {/* Real Support Section */}
+        <TouchableOpacity onPress={() => toggleSection('realSupport')} style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>
+            Real Support
+          </Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
+        </TouchableOpacity>
+        {sections.realSupport && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            <Text style={tw`text-white mb-2`}>Issue or Suggestion</Text>
+            <TextInput
+              placeholder="support@MinimalLife.com"
+              placeholderTextColor="#aaa"
+              style={tw`bg-gray-700 text-white p-3 rounded-md`}
+            />
+          </View>
+        )}
+
+        {/* Premium User Account Section */}
+        <TouchableOpacity onPress={() => toggleSection('premiumAccount')} style={tw`flex-row items-center justify-between`}>
+          <Text style={tw`text-lg text-white font-semibold mt-4`}>
+            Premium User Account
+          </Text>
+          <Icon name="chevron-down-outline" size={24} color="white" />
+        </TouchableOpacity>
+        {sections.premiumAccount && (
+          <View style={tw`mt-2 bg-gray-800 p-4 rounded-lg`}>
+            <View style={tw`flex-row justify-between items-center mb-3`}>
+              <Text style={tw`text-white`}>Already Have an Account</Text>
+              <TouchableOpacity style={tw`bg-blue-500 px-4 py-2 rounded-md`}>
+                <Text style={tw`text-white`}>Login</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={tw`flex-row justify-between items-center`}>
+              <Text style={tw`text-white`}>Get Premium</Text>
+              <TouchableOpacity style={tw`bg-green-500 px-4 py-2 rounded-md`}>
+                <Text style={tw`text-white`}>Join</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+      </ScrollView>
+
+      {/* Footer */}
+      <View style={tw`flex-row items-center justify-between p-4 bg-gray-800`}>
+        <Text style={tw`text-gray-400`}>Device Setting</Text>
+        <Icon name="settings-outline" size={24} color="white" />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-export default HomeScreen;
+export default SettingsScreen;
