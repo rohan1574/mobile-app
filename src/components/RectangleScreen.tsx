@@ -3,7 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const TimeReminder = () => {
+const RectangleScreen = () => {
   return (
     <View
       style={[
@@ -11,60 +11,49 @@ const TimeReminder = () => {
         {backgroundColor: '#1F2630'},
       ]}>
       {/* Title */}
-      <Text
-        style={[
-          tw`text-base font-semibold  top-20  mx-6 text-center`,
-          {color: '#ECEDF0'},
-        ]}>
-        The in-app time reminder is now available to assist you.
+      <Text style={[tw`text-lg  font-semibold  mt-20`, {color: '#ECEDF0'}]}>
+        Infinite scrolling feeds
       </Text>
       <Text
         style={[
-          tw`text-base  font-semibold mx-4 text-center top-24 `,
+          tw`text-base font-medium text-center mt-6 mx-8`,
           {color: '#ECEDF0'},
         ]}>
-        Avoid getting lost in endless scrolling. Before using an addictive app,
-        set a time limit for yourself, and receive a reminder when your time is
-        up.
+        Apps are shown not just as text with their names.
       </Text>
 
       {/* Image Section with Description as background */}
-      <View style={tw`relative mb-16 top-16`}>
-        <Image source={require('./assets/images/Reminder.png')} />
+      <View style={tw`relative mb-20`}>
+        <Image source={require('./assets/images/Rectangle.png')} />
         {/* Linear Gradient */}
         <View
           style={{
             position: 'absolute',
-            top: 60,
+            top: '40%',
             left: 90,
             right: 90,
-            bottom: 135,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            bottom: 130,
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
           }}
         />
 
         {/* Description text at the bottom of the image */}
         <Text
           style={[
-            tw`absolute bottom-48 text-base text-center  font-normal ml-8`,
-            {color: '#ECEDF0'},
+            tw`absolute bottom-32 text-base text-center px-2 font-normal ml-6`,
+            {color: '#ECEDF0', backgroundColor: '#1F2630'},
           ]}>
-          The in-app time reminder is automatically enabled for games, social
-          media, and similar applications. However, you can customize these
-          settings according to your preferences.
+          This discourages mindless app usage by requiring you to consciously
+          identify the app before choosing to open it.
         </Text>
-        {/* pagination */}
-        <View
-          style={[
-            tw`flex-row justify-center items-center bottom-20 pt-5`,
-            {backgroundColor: '#1F2630'},
-          ]}>
+
+        <View style={tw`flex-row justify-center items-center  `}>
           {[...Array(5)].map((_, index) => (
             <View key={index} style={tw`mx-1`}>
               {index === 0 ? (
                 <Icon name="checkmark-circle-outline" size={20} color="white" />
               ) : (
-                <View style={tw`w-3 h-3 rounded-full bg-white`} />
+                <View style={tw`w-3 h-3 rounded-full bg-gray-500`} />
               )}
             </View>
           ))}
@@ -72,7 +61,7 @@ const TimeReminder = () => {
         {/* Next Button */}
         <TouchableOpacity
           style={[
-            tw` py-3 bottom-16  rounded-full items-center mx-10`,
+            tw` py-3 mt-2 rounded-full items-center mx-10`,
             {backgroundColor: '#29313C'},
           ]}
           activeOpacity={0.7}>
@@ -97,4 +86,4 @@ const TimeReminder = () => {
   );
 };
 
-export default TimeReminder;
+export default RectangleScreen;
