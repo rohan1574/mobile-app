@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {s as tw} from 'react-native-wind';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {s as tw} from 'react-native-wind';
 
 const RectangleScreen = () => {
   return (
@@ -14,40 +14,39 @@ const RectangleScreen = () => {
       {/* Title */}
       <Text
         style={[
-          tw` font-bold text-center mb-4 mt-32 bottom-8`,
+          tw` font-bold text-center mb-4  top-12`,
           {color: '#ECEDF0', fontSize: 18},
         ]}>
         No icons on Minimal Life phone
       </Text>
       <Text
         style={[
-          tw` font-bold text-center  `,
+          tw` font-semi-bold text-center top-16`,
           {color: '#ECEDF0', fontSize: 16},
         ]}>
-       Apps are shown not just as text with their names.
+        Apps are shown not just as text with their names.
       </Text>
 
       {/* Image Section with Gradient Overlay */}
-      <View style={tw`items-center  relative`}>
+      <View style={tw`relative top-12`}>
         <Image
           source={require('./assets/images/Rectangle.png')}
-          style={tw``}
-          resizeMode="contain"
+          style={[tw`object-cover`, {width: 238, height: 538}]}
         />
-
-        {/* Gradient Overlay */}
         <LinearGradient
-          colors={['rgba(1, 1, 1, 1)', 'rgba(0,0,0,0)']} // Dark from bottom to transparent top
-          style={[tw`absolute w-60  mb-12`, {bottom: 3, height: 460}]}
-          start={{x: 0.9, y: 1}} // Starts from bottom
-          end={{x: 0.5, y: 0}} // Ends at top
+          colors={[
+            'rgba(31, 38, 48, 0.00)', // Transparent at the top
+            'rgba(31, 38, 48, 1)', // Darker at the bottom
+          ]}
+          locations={[0.2006, 0.9041]}
+          style={[tw`absolute bottom-16 w-full `, {height: 650, bottom: 12}]}
         />
       </View>
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw`absolute bottom-40 text-center ml-4  font-normal `,
-          {color: '#ECEDF0', fontSize: 15},
+          tw`absolute bottom-36 text-center ml-4  font-normal `,
+          {color: '#ECEDF0', fontSize: 15, backgroundColor: '#1F2630'},
         ]}>
         This discourages mindless app usage by requiring you to consciously
         identify the app before choosing to open it.
@@ -56,15 +55,24 @@ const RectangleScreen = () => {
       {/* pagination */}
       <View
         style={[
-          tw`flex-row justify-center items-center bottom-24 py-5 px-20`,
-          {backgroundColor: '#1F2630'},
+          tw`flex-row justify-center items-center  py-5 px-20`,
+          {backgroundColor: '#1F263'},
         ]}>
-        {[...Array(5)].map((_, index) => (
+        {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
-            {index === 0 ? (
-              <Icon name="checkmark-circle-outline" size={20} color="white" />
+            {index < 2 ? ( // প্রথম ৪টি index এর জন্য checkmark আইকন দেখাবে
+              <View
+                style={tw`w-4 h-4 rounded-full bg-white justify-center items-center `}>
+                <Image
+                  source={require('./assets/images/check.png')}
+                  style={tw``}
+                />
+              </View>
             ) : (
-              <Icon name="ellipse-outline" size={20} color="white" />
+              // শেষ index এর জন্য সাদা ডট দেখাবে
+              <View
+                style={tw`w-4 h-4 rounded-full border border-white `}
+              />
             )}
           </View>
         ))}
@@ -72,7 +80,7 @@ const RectangleScreen = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bottom-24 bg-blue-500 py-4 rounded-full items-center`,
+          tw`w-full  bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
         activeOpacity={0.8}>

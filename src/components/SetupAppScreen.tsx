@@ -12,7 +12,7 @@ const SetupAppScreen = () => {
         {backgroundColor: '#1F2630'},
       ]}>
       {/* Header */}
-      <Text style={[tw` text-2xl font-normal mb-4 top-12`, {color: '#ECEDF0'}]}>
+      <Text style={[tw` text-2xl font-normal top-4`, {color: '#ECEDF0'}]}>
         Setup App
       </Text>
 
@@ -37,19 +37,18 @@ const SetupAppScreen = () => {
       </View>
 
       {/* Phone Mockup */}
-      <View style={tw`items-center  relative`}>
+      <View style={tw`relative top-4`}>
         <Image
           source={require('./assets/images/Permit.png')}
-          style={tw``}
-          resizeMode="contain"
+          style={[tw`object-cover`, {width: 238, height: 538}]}
         />
-
-        {/* Gradient Overlay */}
         <LinearGradient
-          colors={['rgba(1, 1, 1, 1)', 'rgba(0,0,0,0)']} // Dark from bottom to transparent top
-          style={[tw`absolute w-60  mb-12`, {bottom: 3, height: 460}]}
-          start={{x: 0.9, y: 1}} // Starts from bottom
-          end={{x: 0.5, y: 0}} // Ends at top
+          colors={[
+            'rgba(31, 38, 48, 0.00)', // Transparent at the top
+            'rgba(31, 38, 48, 1)', // Darker at the bottom
+          ]}
+          locations={[0.2006, 0.9041]}
+          style={[tw`absolute bottom-16 w-full `, {height: 650, bottom: 12}]}
         />
       </View>
 
@@ -63,26 +62,25 @@ const SetupAppScreen = () => {
         Minimal Life phone needs access to usage statistics for the in-app time
         reminder to be functional.
       </Text>
-
+      
       {/* Button */}
       <TouchableOpacity
         style={[
-          tw`px-6 py-3 rounded-full flex-row items-center bottom-12`,
+          tw`px-8 py-3 rounded-full flex-row items-center bottom-8`,
           {backgroundColor: '#29313C'},
         ]}>
-        <Text style={[tw` text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
-          Open usage permission setting
+        <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
+        Open usage permission setting
         </Text>
         <Icon name="arrow-forward" size={20} color="#ECEDF0" />
       </TouchableOpacity>
 
       {/* Footer */}
-      <Text style={[tw`text-sm  bottom-12`, {color: '#858E9D'}]}>
+      <Text style={[tw`text-sm bottom-4`, {color: '#858E9D'}]}>
         You can remove the permission anytime later.
       </Text>
       <TouchableOpacity>
-        <Text
-          style={[tw` bottom-8 text-center`, {fontSize: 12, color: '#434C5B'}]}>
+        <Text style={[tw` text-center`, {fontSize: 12, color: '#434C5B'}]}>
           Are you having trouble granting overlay permission?
           <Text style={tw`underline`}>Contact support via email.</Text>
         </Text>

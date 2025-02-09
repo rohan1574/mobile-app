@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {s as tw} from 'react-native-wind';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {s as tw} from 'react-native-wind';
 
 const SmartPhone = () => {
   return (
@@ -14,80 +14,81 @@ const SmartPhone = () => {
       {/* Title */}
       <Text
         style={[
-          tw` font-bold text-center mb-4 mt-32 `,
+          tw`font-medium text-center mb-4 top-20`,
           {color: '#ECEDF0', fontSize: 18},
         ]}>
         Your smartphone can quickly become addictive in several ways:
       </Text>
       <Text
         style={[
-          tw` font-bold text-center mb-4  `,
+          tw` font-bold text-center mb-4 top-20 `,
           {color: '#ECEDF0', fontSize: 18},
         ]}>
         Icons
       </Text>
       <Text
         style={[
-          tw` font-bold text-center  `,
+          tw`font-medium text-center top-20 `,
           {color: '#ECEDF0', fontSize: 15},
         ]}>
-       The typical app icon is colorful. It’s designed to grab your attention so that you open the app.
+        The typical app icon is colorful. It’s designed to grab your attention
+        so that you open the app.
       </Text>
-
       {/* Image Section with Gradient Overlay */}
-      <View style={tw`items-center  relative`}>
+      <View style={tw`relative top-12`}>
         <Image
           source={require('./assets/images/mobile.png')}
-          style={tw``}
-          resizeMode="contain"
+          style={[tw`object-cover`,{width:238, height:538}]}
         />
-
-        {/* Gradient Overlay */}
         <LinearGradient
-          colors={['rgba(1, 1, 1, 1)', 'rgba(0,0,0,0)']} // Dark from bottom to transparent top
-          style={[tw`absolute w-60  mb-12`, {bottom: 3, height: 460}]}
-          start={{x: 0.9, y: 1}} // Starts from bottom
-          end={{x: 0.5, y: 0}} // Ends at top
+          colors={[
+            'rgba(31, 38, 48, 0.00)', // Transparent at the top
+            'rgba(31, 38, 48, 1)', // Darker at the bottom
+          ]}
+          locations={[0.2006, 0.9041]}
+          style={[tw`absolute bottom-16 w-full `, {height: 650, bottom: 12}]}
         />
       </View>
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw`absolute bottom-80 text-center ml-4  font-normal `,
+          tw`absolute text-center font-normal py-2 `,
           {backgroundColor: 'rgba(31, 38, 48, 0.5)'},
-          {color: '#ECEDF0', fontSize: 15},
+          {color: '#ECEDF0', fontSize: 15, bottom: 290},
         ]}>
-        Consequently, your brain learns that opening colorful icons leads to “interesting” (stimulating) content
+        Consequently, your brain learns that opening colorful icons leads to
+        “interesting” (stimulating) content
       </Text>
       <Text
         style={[
-          tw`absolute bottom-56 text-center ml-4  font-normal `,
-          {color: '#ECEDF0', fontSize: 14},
+          tw`absolute text-center ml-4 py-2 font-normal `,
+          {color: '#ECEDF0', fontSize: 14, bottom: 180},
           {backgroundColor: 'rgba(31, 38, 48, 0.5)'},
         ]}>
-        Eventually, you open apps without conscious thought as your brain craves stimulation - wondering later why you’re in an  app you never planned to open.
+        Eventually, you open apps without conscious thought as your brain craves
+        stimulation - wondering later why you’re in an app you never planned to
+        open.
       </Text>
 
       {/* pagination */}
       <View
         style={[
-          tw`flex-row justify-center items-center bottom-32 py-5 px-20`,
-          {backgroundColor: '#1F2630'},
+          tw`flex-row justify-center items-center bottom-12 py-5 px-20`,
+          {backgroundColor: '#1F263'},
         ]}>
         {[...Array(5)].map((_, index) => (
-          <View key={index} style={tw`mx-1`}>
-            {index === 0 ? (
-              <Icon name="checkmark-circle-outline" size={20} color="white" />
-            ) : (
-              <Icon name="ellipse-outline" size={20} color="white" />
-            )}
-          </View>
+          <View
+            key={index}
+            style={tw`w-4 h-4 rounded-full ${
+              index === 0 ? 'bg-white' : 'border-white border'
+            } mx-1`}
+          />
         ))}
       </View>
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bottom-32 bg-blue-500 py-4 rounded-full items-center`,
+          tw`w-full bottom-12 bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
         activeOpacity={0.8}>

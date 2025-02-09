@@ -12,7 +12,7 @@ const SetupApp = () => {
         {backgroundColor: '#1F2630'},
       ]}>
       {/* Header */}
-      <Text style={[tw` text-2xl font-normal mb-4 top-12`, {color: '#ECEDF0'}]}>
+      <Text style={[tw` text-2xl font-normal top-4`, {color: '#ECEDF0'}]}>
         Setup App
       </Text>
 
@@ -37,19 +37,18 @@ const SetupApp = () => {
       </View>
 
       {/* Phone Mockup */}
-      <View style={tw`items-center  relative`}>
+      <View style={tw`relative top-4`}>
         <Image
-          source={require('./assets/images/Permit.png')}
-          style={tw``}
-          resizeMode="contain"
+          source={require('./assets/images/Display.png')}
+          style={[tw`object-cover`, {width: 238, height: 538}]}
         />
-        <Image source={require('./assets/images/graph.png')} style={tw``} />
-        {/* Gradient Overlay */}
         <LinearGradient
-          colors={['rgba(1, 1, 1, 1)', 'rgba(0,0,0,0)']} // Dark from bottom to transparent top
-          style={[tw`absolute w-60  mb-12`, {bottom: 3, height: 460}]}
-          start={{x: 0.9, y: 1}} // Starts from bottom
-          end={{x: 0.5, y: 0}} // Ends at top
+          colors={[
+            'rgba(31, 38, 48, 0.00)', // Transparent at the top
+            'rgba(31, 38, 48, 1)', // Darker at the bottom
+          ]}
+          locations={[0.2006, 0.9041]}
+          style={[tw`absolute bottom-16 w-full `, {height: 650, bottom: 12}]}
         />
       </View>
 
@@ -67,20 +66,26 @@ const SetupApp = () => {
       <View
         style={[tw`absolute w-full px-6 bottom-40`, {alignItems: 'center'}]}>
         <View style={tw`flex-row items-center mb-2 `}>
-        <Image source={require('./assets/images/graph.png')} style={tw`bottom-2 right-4`} />
+          <Image
+            source={require('./assets/images/graph.png')}
+            style={tw`bottom-2 right-4`}
+          />
           <Text
             style={[
-              tw`text-base font-semibold text-start`,
+              tw`text-base font-normal text-start`,
               {color: '#ECEDF0'},
             ]}>
             Press button below and find Minimal Life phone.
           </Text>
         </View>
         <View style={tw`flex-row items-center `}>
-        <Image source={require('./assets/images/graph.png')} style={tw`bottom-2 right-4`} />
+          <Image
+            source={require('./assets/images/graph.png')}
+            style={tw`bottom-2 right-4`}
+          />
           <Text
             style={[
-              tw`text-base font-semibold text-start `,
+              tw`text-base font-normal text-start `,
               {color: '#ECEDF0'},
             ]}>
             Activate slider next time to Minimal Life phone.
@@ -91,22 +96,22 @@ const SetupApp = () => {
       {/* Button */}
       <TouchableOpacity
         style={[
-          tw`px-6 py-3 rounded-full flex-row items-center bottom-12`,
+          tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,
           {backgroundColor: '#29313C'},
         ]}>
-        <Text style={[tw`text-base font-bold mr-2 px-12`, {color: '#ECEDF0'}]}>
+        <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
           Open overlay settings
         </Text>
         <Icon name="arrow-forward" size={20} color="#ECEDF0" />
       </TouchableOpacity>
 
       {/* Footer */}
-      <Text style={[tw`text-sm bottom-12`, {color: '#858E9D'}]}>
+      <Text style={[tw`text-sm bottom-4`, {color: '#858E9D'}]}>
         You can remove the permission anytime later.
       </Text>
       <TouchableOpacity>
         <Text
-          style={[tw`bottom-8 text-center`, {fontSize: 12, color: '#434C5B'}]}>
+          style={[tw` text-center`, {fontSize: 12, color: '#434C5B'}]}>
           Are you having trouble granting overlay permission?
           <Text style={tw`underline`}>Contact support via email.</Text>
         </Text>
