@@ -39,10 +39,10 @@ const NotificationScreen = () => {
       </View>
 
       {/* Main Content */}
-      <View style={tw`flex-1 justify-center items-center mb-10`}>
+      <View style={tw`flex-1 justify-center items-center bottom-8`}>
         <Text
           style={[
-            tw`text-center text-sm leading-relaxed mb-6 `, // Tailwind styles
+            tw`text-center text-sm leading-relaxed bottom-6`, // Tailwind styles
             {
               color: '#ECEDF0', // Use quotes for colors
               textAlign: 'center', // CamelCase for text-align
@@ -60,7 +60,7 @@ const NotificationScreen = () => {
           spending more time on your device.
         </Text>
 
-        <View style={tw`p-6  rounded-full`}>
+        <View style={tw`p-6 top-4 rounded-full`}>
           <Image
             source={require('./assets/images/rony.png')} // Adjust path if needed
             style={tw`w-20 h-20`}
@@ -69,7 +69,7 @@ const NotificationScreen = () => {
         </View>
         <Text
           style={[
-            tw` text-center text-sm leading-relaxed mt-6`, // Tailwind styles
+            tw` text-center text-sm leading-relaxed top-12`, // Tailwind styles
             {
               color: '#ECEDF0', // Color needs quotes
               textAlign: 'center', // CamelCase for text-align
@@ -89,13 +89,26 @@ const NotificationScreen = () => {
       </View>
 
       {/* Pagination Dots */}
-      <View style={tw`flex-row justify-center items-center my-6`}>
-        {[...Array(5)].map((_, index) => (
+      <View
+        style={[
+          tw`flex-row justify-center items-center py-5 px-20`,
+          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+        ]}>
+        {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
-            {index === 0 ? (
-              <Icon name="checkmark-circle-outline" size={20} color="white" />
+            {index < 4 ? ( // প্রথম 4টির জন্য চেকমার্ক
+              <View
+                style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
+                <Image
+                  source={require('./assets/images/check.png')}
+                  style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
+                />
+              </View>
+            ) : index === 4 ? ( // 5 নম্বর আইটেমের জন্য solid সাদা dot
+              <View style={tw`w-4 h-4 rounded-full bg-white`} />
             ) : (
-              <View style={tw`w-3 h-3 rounded-full bg-gray-500`} />
+              // শেষ ৩টি আইটেমের জন্য শুধু বর্ডার
+              <View style={tw`w-4 h-4 rounded-full border border-white`} />
             )}
           </View>
         ))}
@@ -104,13 +117,20 @@ const NotificationScreen = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bg-blue-500 py-4 rounded-full items-center`,
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
         activeOpacity={0.8}>
         <View style={tw`flex-row items-center`}>
-          <Text style={[tw` text-lg font-medium`,{color: '#ECEDF0'}]}>Next</Text>
-          <Icon name="arrow-forward" size={20} color="#ECEDF0" style={tw`ml-1`} />
+          <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
+            Next
+          </Text>
+          <Icon
+            name="arrow-forward"
+            size={20}
+            color="#ECEDF0"
+            style={tw`ml-1`}
+          />
         </View>
       </TouchableOpacity>
     </View>

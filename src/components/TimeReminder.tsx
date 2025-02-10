@@ -55,21 +55,23 @@ const TimeReminder = () => {
       <View
         style={[
           tw`flex-row justify-center items-center bottom-2 py-5 px-20`,
-          {backgroundColor: '#1F263'},
+          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
-            {index < 4 ? ( // প্রথম ৪টি index এর জন্য checkmark আইকন দেখাবে
+            {index < 3 ? ( // প্রথম 3টির জন্য চেকমার্ক
               <View
-                style={tw`w-4 h-4 rounded-full bg-white justify-center items-center `}>
+                style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
                 <Image
                   source={require('./assets/images/check.png')}
-                  style={tw``}
+                  style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
                 />
               </View>
+            ) : index === 3 ? ( // 4 নম্বর আইটেমের জন্য solid সাদা dot
+              <View style={tw`w-4 h-4 rounded-full bg-white`} />
             ) : (
-              // শেষ index এর জন্য সাদা ডট দেখাবে
-              <View style={tw`w-4 h-4 rounded-full border border-white `} />
+              // শেষ ৩টি আইটেমের জন্য শুধু বর্ডার
+              <View style={tw`w-4 h-4 rounded-full border border-white`} />
             )}
           </View>
         ))}
