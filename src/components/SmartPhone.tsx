@@ -37,7 +37,7 @@ const SmartPhone = () => {
       {/* Image Section with Gradient Overlay */}
       <View style={tw`relative top-12`}>
         <Image
-          source={require('./assets/images/mobile.png')}
+          source={require('../../assets/images/mobile.png')}
           style={[tw`object-cover`,{width:238, height:538}]}
         />
         <LinearGradient

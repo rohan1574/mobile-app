@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { s as tw } from 'react-native-wind';
+import { useNavigation } from '@react-navigation/native';
 
-const MinimalLifeScreen = () => {
+export default function MinimalLifeScreen () {
+  const navigation = useNavigation();
+
   return (
     <View style={[tw`flex-1 justify-between px-6`, { backgroundColor: '#1F2630' }]}>
       {/* Header Section */}
@@ -40,6 +43,7 @@ const MinimalLifeScreen = () => {
         <TouchableOpacity
           style={[tw`w-full max-w-xs rounded-full py-3`, { backgroundColor: '#29313C' }]}
           activeOpacity={0.8}
+          onPress={() => navigation.navigate('StartPageFirst')}
         >
           <Text style={[tw`text-center font-medium text-base`, { color: '#ECEDF0' }]}>
             Get Started
@@ -48,6 +52,4 @@ const MinimalLifeScreen = () => {
       </View>
     </View>
   );
-};
-
-export default MinimalLifeScreen;
+}
