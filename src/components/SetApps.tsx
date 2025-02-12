@@ -2,9 +2,19 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  TenPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'TenPage'>;
 
 
-const SetupApps = () => {
+const SetApps = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -59,7 +69,7 @@ const SetupApps = () => {
         style={[
           tw`px-24 py-3 rounded-full flex-row items-center top-24`,
           {backgroundColor: '#29313C'},
-        ]}>
+        ]} onPress={() => navigation.navigate('TenPage')}>
         <Text style={[tw` text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
           Open settings
         </Text>
@@ -79,4 +89,4 @@ const SetupApps = () => {
   );
 };
 
-export default SetupApps;
+export default SetApps;

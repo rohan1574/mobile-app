@@ -1,10 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { s as tw } from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
+type RootStackParamList = {
+  StartPageFirst: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'StartPageFirst'>;
+
+
 export default function MinimalLifeScreen () {
-  const navigation = useNavigation();
+   const navigation = useNavigation<NavigationProp>();
 
   return (
     <View style={[tw`flex-1 justify-between px-6`, { backgroundColor: '#1F2630' }]}>

@@ -3,8 +3,18 @@ import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  FivePage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'FivePage'>;
 
 const TimeReminder = () => {
+   const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -28,7 +38,7 @@ const TimeReminder = () => {
       {/* Image Section with Gradient Overlay */}
       <View style={tw`relative top-8`}>
         <Image
-          source={require('./assets/images/Reminder.png')}
+          source={require('../../assets/images/Reminder.png')}
           style={[tw`object-cover`, {width: 238, height: 538}]}
         />
         <LinearGradient
@@ -63,7 +73,7 @@ const TimeReminder = () => {
               <View
                 style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
                 <Image
-                  source={require('./assets/images/check.png')}
+                  source={require('../../assets/images/check.png')}
                   style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
                 />
               </View>
@@ -82,7 +92,7 @@ const TimeReminder = () => {
           tw`w-full bg-blue-500 py-3 rounded-full items-center bottom-4`,
           {backgroundColor: '#29313C'},
         ]}
-        activeOpacity={0.8}>
+        activeOpacity={0.8} onPress={() => navigation.navigate('FivePage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

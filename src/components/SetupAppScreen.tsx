@@ -3,8 +3,18 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  NinePage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'NinePage'>;
 
 const SetupAppScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -39,7 +49,7 @@ const SetupAppScreen = () => {
       {/* Phone Mockup */}
       <View style={tw`relative top-4`}>
         <Image
-          source={require('./assets/images/Permit.png')}
+          source={require('../../assets/images/Permit.png')}
           style={[tw`object-cover`, {width: 238, height: 538}]}
         />
         <LinearGradient
@@ -68,7 +78,7 @@ const SetupAppScreen = () => {
         style={[
           tw`px-8 py-3 rounded-full flex-row items-center bottom-8`,
           {backgroundColor: '#29313C'},
-        ]}>
+        ]} onPress={() => navigation.navigate('NinePage')}>
         <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
         Open usage permission setting
         </Text>

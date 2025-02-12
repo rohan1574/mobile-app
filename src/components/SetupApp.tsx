@@ -3,8 +3,18 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  EightPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'EightPage'>;
 
 const SetupApp = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -39,7 +49,7 @@ const SetupApp = () => {
       {/* Phone Mockup */}
       <View style={tw`relative top-4`}>
         <Image
-          source={require('./assets/images/Display.png')}
+          source={require('../../assets/images/Display.png')}
           style={[tw`object-cover`, {width: 238, height: 538}]}
         />
         <LinearGradient
@@ -67,7 +77,7 @@ const SetupApp = () => {
         style={[tw`absolute w-full px-6 bottom-40`, {alignItems: 'center'}]}>
         <View style={tw`flex-row items-center mb-2 `}>
           <Image
-            source={require('./assets/images/graph.png')}
+            source={require('../../assets/images/graph.png')}
             style={tw`bottom-2 right-4`}
           />
           <Text
@@ -80,7 +90,7 @@ const SetupApp = () => {
         </View>
         <View style={tw`flex-row items-center `}>
           <Image
-            source={require('./assets/images/graph.png')}
+            source={require('../../assets/images/graph.png')}
             style={tw`bottom-2 right-4`}
           />
           <Text
@@ -98,7 +108,7 @@ const SetupApp = () => {
         style={[
           tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,
           {backgroundColor: '#29313C'},
-        ]}>
+        ]} onPress={() => navigation.navigate('EightPage')}>
         <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
           Open overlay settings
         </Text>

@@ -2,9 +2,18 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
+type RootStackParamList = {
+  ElevenPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ElevenPage'>;
 
 const Premium = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -14,7 +23,7 @@ const Premium = () => {
      
       {/* Permission Text */}
     
-        <Text style={[tw`font-medium px-24 py-4 rounded-full `, {color: '#ECEDF0',backgroundColor: '#29313C'}]}>
+        <Text style={[tw`font-medium px-24 py-4 rounded-full `, {color: '#ECEDF0',backgroundColor: '#29313C'}]} onPress={() => navigation.navigate('ElevenPage')}>
         Get Premium Now
         </Text>
       <Text

@@ -3,8 +3,18 @@ import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  SecondPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'SecondPage'>;
 
 const SmartPhone = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -91,7 +101,7 @@ const SmartPhone = () => {
           tw`w-full bottom-12 bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
-        activeOpacity={0.8}>
+        activeOpacity={0.8} onPress={() => navigation.navigate('SecondPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

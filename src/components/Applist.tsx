@@ -11,7 +11,7 @@ const openApp = (packageName: string) => {
   );
 };
 
-const AppList = () => {
+const Applist = () => {
   const [searchText, setSearchText] = useState('');
   const [appList, setAppList] = useState<Array<{ appName: string; packageName: string; isSystemApp: boolean }>>([]);
   const [screenTimeData, setScreenTimeData] = useState<Array<{ appName: string; screenTime: string }>>([]);
@@ -121,4 +121,4 @@ const AppList = () => {
   );
 };
 
-export default AppList;
+export default Applist;

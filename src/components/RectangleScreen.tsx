@@ -1,10 +1,20 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  ThirdPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ThirdPage'>;
 
 const RectangleScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -30,7 +40,7 @@ const RectangleScreen = () => {
       {/* Image Section with Gradient Overlay */}
       <View style={tw`relative top-12`}>
         <Image
-          source={require('./assets/images/Rectangle.png')}
+          source={require('../../assets/images/Rectangle.png')}
           style={[tw`object-cover`, {width: 238, height: 538}]}
         />
         <LinearGradient
@@ -64,7 +74,7 @@ const RectangleScreen = () => {
               <View
                 style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
                 <Image
-                  source={require('./assets/images/check.png')}
+                  source={require('../../assets/images/check.png')}
                   style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
                 />
               </View>
@@ -84,7 +94,7 @@ const RectangleScreen = () => {
           tw`w-full  bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
-        activeOpacity={0.8}>
+        activeOpacity={0.8} onPress={() => navigation.navigate('ThirdPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

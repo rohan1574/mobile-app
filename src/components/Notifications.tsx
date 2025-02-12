@@ -2,8 +2,19 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-const NotificationScreen = () => {
+type RootStackParamList = {
+  SixPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'SixPage'>;
+
+
+const Notifications = () => {
+   const navigation = useNavigation<NavigationProp>();
   return (
     <View style={[tw`flex-1  px-6 py-12`, {backgroundColor: '#1F2630'}]}>
       {/* Header */}
@@ -62,7 +73,7 @@ const NotificationScreen = () => {
 
         <View style={tw`p-6 top-4 rounded-full`}>
           <Image
-            source={require('./assets/images/rony.png')} // Adjust path if needed
+            source={require('../../assets/images/rony.png')} // Adjust path if needed
             style={tw`w-20 h-20`}
             resizeMode="contain"
           />
@@ -100,7 +111,7 @@ const NotificationScreen = () => {
               <View
                 style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
                 <Image
-                  source={require('./assets/images/check.png')}
+                  source={require('../../assets/images/check.png')}
                   style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
                 />
               </View>
@@ -120,7 +131,7 @@ const NotificationScreen = () => {
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
           {backgroundColor: '#29313C'},
         ]}
-        activeOpacity={0.8}>
+        activeOpacity={0.8} onPress={() => navigation.navigate('SixPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next
@@ -137,4 +148,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default Notifications;

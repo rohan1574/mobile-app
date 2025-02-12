@@ -1,10 +1,19 @@
 import React from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  SevenPage: undefined; // Add other screens as needed
+};
+
+// Type the navigation hook
+type NavigationProp = StackNavigationProp<RootStackParamList, 'SevenPage'>;
 
 const Uninstall = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -24,7 +33,7 @@ const Uninstall = () => {
       {/* Image Section with Gradient Overlay */}
       <View style={tw`relative `}>
         <Image
-          source={require('./assets/images/group.png')}
+          source={require('../../assets/images/group.png')}
           style={[tw`object-cover`, {width: 368, height: 338}]}
         />
       </View>
@@ -58,7 +67,7 @@ const Uninstall = () => {
               <View
                 style={tw`w-4 h-4 rounded-full bg-white justify-center items-center`}>
                 <Image
-                  source={require('./assets/images/check.png')}
+                  source={require('../../assets/images/check.png')}
                   style={tw`w-2 h-2`} // চেকমার্ক সাইজ ঠিক করা
                 />
               </View>
@@ -78,7 +87,7 @@ const Uninstall = () => {
           tw`w-full bg-blue-500 py-3 rounded-full items-center top-12`,
           {backgroundColor: '#29313C'},
         ]}
-        activeOpacity={0.8}>
+        activeOpacity={0.8} onPress={() => navigation.navigate('SevenPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next
