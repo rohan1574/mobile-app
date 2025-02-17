@@ -64,8 +64,8 @@ const TimeReminder = () => {
       {/* pagination */}
       <View
         style={[
-          tw`flex-row justify-center items-center bottom-2 py-5 px-20`,
-          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          tw`flex-row justify-center items-center py-5 px-20`,
+          {backgroundColor: '#1F2630',bottom:28}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -89,8 +89,8 @@ const TimeReminder = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bg-blue-500 py-3 rounded-full items-center bottom-4`,
-          {backgroundColor: '#29313C'},
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
+          {backgroundColor: '#29313C',bottom:35},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('FivePage')}>
         <View style={tw`flex-row items-center`}>

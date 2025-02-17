@@ -51,8 +51,8 @@ const HomeScreen = () => {
     isSystemApp: boolean;
   }) => {
     // Check if the limit of 3 apps is reached
-    if (selectedApps.length >= 3) {
-      Alert.alert('Limit Reached', 'You can only select up to 3 apps.'); // Use Alert here
+    if (selectedApps.length >= 2) {
+      Alert.alert('Limit Reached', 'You can only select up to 2 apps.'); // Use Alert here
       return;
     }
   
@@ -186,7 +186,7 @@ const HomeScreen = () => {
           <TouchableOpacity
             key={app.packageName}
             style={[
-              tw`w-4/5 py-3 my-2 rounded-full border items-center`,
+              tw`w-4/5 py-2 my-2 rounded-full border items-center`,
               { borderColor: '#858E9D' },
             ]}
           >
@@ -272,7 +272,7 @@ const HomeScreen = () => {
 
       {/* Progress Section */}
       <View style={tw`flex-1 justify-center px-4 mb-20`}>
-        <Text
+        {/* <Text
           style={[
             tw`text-center text-sm font-normal mb-2`,
             {
@@ -283,16 +283,16 @@ const HomeScreen = () => {
             },
           ]}>
           Overall Ranking
-        </Text>
+        </Text> */}
 
-        <Slider
+        {/* <Slider
           value={70}
           minimumValue={0}
           maximumValue={100}
           thumbTintColor="#ECEDF0"
           minimumTrackTintColor="#495057"
           maximumTrackTintColor="#495057"
-        />
+        /> */}
         <Text
           style={[
             tw`text-center text-sm font-normal`,
@@ -301,6 +301,7 @@ const HomeScreen = () => {
               fontFamily: 'Roboto',
               fontWeight: '400',
               lineHeight: 16,
+              top:70
             },
           ]}>
           Today Unlock: 5 || Today Use: 120 M
@@ -314,6 +315,7 @@ const HomeScreen = () => {
               fontFamily: 'Roboto',
               fontWeight: '400',
               lineHeight: 16,
+              top:70
             },
           ]}>
           Use less to increase progress bar
@@ -321,7 +323,7 @@ const HomeScreen = () => {
       </View>
 
       {/* Bottom Navigation */}
-      <View style={tw`absolute bottom-0 flex-row justify-center w-full py-4 px-2 mb-10`}>
+      <View style={tw`absolute bottom-0 flex-row justify-center w-full px-2 mb-4`}>
         {/* Camera Button */}
         <TouchableOpacity
           style={[

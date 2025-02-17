@@ -7,7 +7,7 @@ const Premiums = () => {
     <View style={tw`flex-1 bg-gray-900 justify-center items-center p-4`}>
       <Text style={tw`text-white text-xl font-normal bottom-20`}>You're all Good!</Text>
       
-      <Image source={require('./assets/images/premium.png')} style={tw`w-48 h-48 bottom-16`} />
+      <Image source={require('./assets/images/cut.png')} style={tw`w-48 h-48 bottom-16`} />
 
       <TouchableOpacity style={tw`bg-gray-800 rounded-full w-full py-3 mb-4`}>
         <Text style={tw`text-white text-center text-lg font-semibold`}>Continue to Home Screen</Text>

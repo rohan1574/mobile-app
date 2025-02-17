@@ -66,7 +66,7 @@ const RectangleScreen = () => {
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630',bottom:8}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -91,8 +91,8 @@ const RectangleScreen = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full  bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C'},
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
+          {backgroundColor: '#29313C',bottom:10},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('ThirdPage')}>
         <View style={tw`flex-row items-center`}>

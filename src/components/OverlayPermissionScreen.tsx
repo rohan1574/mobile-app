@@ -116,12 +116,12 @@ const SetupApp = () => {
       </TouchableOpacity>
 
       {/* Footer */}
-      <Text style={[tw`text-sm bottom-4`, {color: '#858E9D'}]}>
+      <Text style={[tw`text-sm bottom-6`, {color: '#858E9D'}]}>
         You can remove the permission anytime later.
       </Text>
       <TouchableOpacity>
         <Text
-          style={[tw` text-center`, {fontSize: 12, color: '#434C5B'}]}>
+          style={[tw`bottom-2 text-center`, {fontSize: 12, color: '#434C5B'}]}>
           Are you having trouble granting overlay permission?
           <Text style={tw`underline`}>Contact support via email.</Text>
         </Text>

@@ -58,8 +58,8 @@ const Uninstall = () => {
       {/* pagination */}
       <View
         style={[
-          tw`flex-row justify-center items-center top-12 py-5 px-20`,
-          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          tw`flex-row justify-center items-center py-5 px-20`,
+          {backgroundColor: '#1F2630',top:58}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -84,8 +84,8 @@ const Uninstall = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bg-blue-500 py-3 rounded-full items-center top-12`,
-          {backgroundColor: '#29313C'},
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
+          {backgroundColor: '#29313C',top:58},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('SevenPage')}>
         <View style={tw`flex-row items-center`}>

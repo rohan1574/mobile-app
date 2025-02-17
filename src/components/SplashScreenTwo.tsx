@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
       {/* Image */}
       <View style={tw`bg-white p-4 rounded-xl `}>
         <Image
-          source={require('../../assets/images/wifi.png')}
+          source={require('../../assets/images/hand.png')}
           style={tw`w-60 h-60`}
           resizeMode="contain"
         />

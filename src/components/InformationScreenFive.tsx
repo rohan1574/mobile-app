@@ -103,7 +103,7 @@ const Notifications = () => {
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630',top:36}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -129,7 +129,7 @@ const Notifications = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C'},
+          {backgroundColor: '#29313C',top:36},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('SixPage')}>
         <View style={tw`flex-row items-center`}>

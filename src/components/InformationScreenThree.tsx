@@ -48,7 +48,7 @@ const InfiniteScreen = () => {
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw`absolute bottom-36 text-center ml-4  font-normal `,
+          tw`absolute bottom-40 text-center ml-4  font-normal `,
           {color: '#ECEDF0', fontSize: 15, backgroundColor: '#1F2630'},
         ]}>
         Social media apps leverage AI to tailor content precisely to your
@@ -59,7 +59,7 @@ const InfiniteScreen = () => {
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630',top:12}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -84,8 +84,8 @@ const InfiniteScreen = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full top-4 bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C'},
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
+          {backgroundColor: '#29313C',top:10},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('FourPage')}>
         <View style={tw`flex-row items-center`}>

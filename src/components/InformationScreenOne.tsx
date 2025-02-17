@@ -86,7 +86,7 @@ const SmartPhone = () => {
           tw`flex-row justify-center items-center bottom-12 py-5 px-20`,
           {backgroundColor: '#1F263'},
         ]}>
-        {[...Array(5)].map((_, index) => (
+        {[...Array(6)].map((_, index) => (
           <View
             key={index}
             style={tw`w-4 h-4 rounded-full ${
@@ -98,8 +98,8 @@ const SmartPhone = () => {
       {/* Next Button */}
       <TouchableOpacity
         style={[
-          tw`w-full bottom-12 bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C'},
+          tw`w-full bg-blue-500 py-3 rounded-full items-center`,
+          {backgroundColor: '#29313C',bottom:48},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('SecondPage')}>
         <View style={tw`flex-row items-center`}>
