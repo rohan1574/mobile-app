@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import type {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
 type RootStackParamList = {
   SixPage: undefined; // Add other screens as needed
@@ -12,9 +12,8 @@ type RootStackParamList = {
 // Type the navigation hook
 type NavigationProp = StackNavigationProp<RootStackParamList, 'SixPage'>;
 
-
 const Notifications = () => {
-   const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View style={[tw`flex-1  px-6 py-12`, {backgroundColor: '#1F2630'}]}>
       {/* Header */}
@@ -53,22 +52,21 @@ const Notifications = () => {
       <View style={tw`flex-1 justify-center items-center bottom-8`}>
         <Text
           style={[
-            tw`text-center text-sm leading-relaxed bottom-6`, // Tailwind styles
+            tw`text-center text-sm leading-relaxed bottom-8`, // Tailwind styles
             {
-              color: '#ECEDF0', // Use quotes for colors
+              color: '#AAAEB3', // Use quotes for colors
               textAlign: 'center', // CamelCase for text-align
               fontFamily: 'Roboto', // Custom font family
-              fontSize: 17, // Font size as a number
+              fontSize: 16, // Font size as a number
               fontStyle: 'normal', // Font style in camelCase
               fontWeight: '500', // Font weight as a string or number
               lineHeight: 20, // Adjust line height (React Native expects numeric values)
               letterSpacing: -0.51, // Letter spacing as a number
             },
           ]}>
-          Notifications can be quite intrusive and disrupt your concentration.
-          They often prompt you to check your phone more frequently by
-          suggesting there's something engaging happening, which can lead to
-          spending more time on your device.
+          Notifications poke and disrupt your concentration. They prompt you to
+          check your phone and make you feel something engaging is happening,
+          which leads to spending excessive time on your device.
         </Text>
 
         <View style={tw`p-6 top-4 rounded-full`}>
@@ -80,22 +78,19 @@ const Notifications = () => {
         </View>
         <Text
           style={[
-            tw` text-center text-sm leading-relaxed top-12`, // Tailwind styles
+            tw` text-center text-sm leading-relaxed top-24`, // Tailwind styles
             {
-              color: '#ECEDF0', // Color needs quotes
+              color: '#AAAEB3', // Color needs quotes
               textAlign: 'center', // CamelCase for text-align
               fontFamily: 'Roboto', // Corrected font-family syntax
-              fontSize: 17, // No "px" in React Native
+              fontSize: 16, // No "px" in React Native
               fontStyle: 'normal', // Use camelCase
               fontWeight: '400', // Font weight as a string or number
               lineHeight: 20, // Adjusted for better readability
               letterSpacing: -0.51, // No "px" required
             },
           ]}>
-          The Minimal Life phone features a notification filter that you can
-          activate. This way, you won't miss any notifications—they'll be
-          filtered and stored for later review, helping you stay focused without
-          being interrupted.
+          Introducing Minimal Life notification filter. You won't miss important notifications, block unnecessary, and stay focused.
         </Text>
       </View>
 
@@ -103,7 +98,7 @@ const Notifications = () => {
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630',top:36}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630', top: 20}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -129,9 +124,10 @@ const Notifications = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',top:36},
+          {backgroundColor: '#29313C', top: 16},
         ]}
-        activeOpacity={0.8} onPress={() => navigation.navigate('SixPage')}>
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('SixPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

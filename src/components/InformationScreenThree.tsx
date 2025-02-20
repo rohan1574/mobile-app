@@ -3,8 +3,8 @@ import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import type {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
 type RootStackParamList = {
   FourPage: undefined; // Add other screens as needed
@@ -49,17 +49,17 @@ const InfiniteScreen = () => {
       <Text
         style={[
           tw`absolute bottom-40 text-center ml-4  font-normal `,
-          {color: '#ECEDF0', fontSize: 15, backgroundColor: '#1F2630'},
+          {color: '#AAAEB3', fontSize: 13, backgroundColor: '#1F2630'},
         ]}>
-        Social media apps leverage AI to tailor content precisely to your
-        interests, aiming to maximize the time you spend within the app.
+        Social media platforms use AI to customize content based on your
+        interests, with the goal of increasing the time you spend using the app.
       </Text>
 
       {/* pagination */}
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630',top:12}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630', top: 12}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -85,9 +85,10 @@ const InfiniteScreen = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',top:10},
+          {backgroundColor: '#29313C', top: 10},
         ]}
-        activeOpacity={0.8} onPress={() => navigation.navigate('FourPage')}>
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('FourPage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

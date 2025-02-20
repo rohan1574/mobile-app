@@ -32,7 +32,7 @@ const SetupAppScreen = () => {
           <View
             key={num}
             style={[
-              tw`h-10 w-10 rounded-full flex items-center justify-center mx-2`,
+              tw`h-10 w-10 rounded-full flex items-center justify-center mx-4`,
               index === 0 ? tw`bg-white` : tw`border border-white`,
             ]}>
             <Text
@@ -67,7 +67,7 @@ const SetupAppScreen = () => {
         style={[
           tw`absolute bottom-48 text-center  font-semibold `,
 
-          {color: '#ECEDF0', fontSize: 15},
+          {color: '#AAAEB3', fontSize: 15},
         ]}>
         Minimal Life phone needs access to usage statistics for the in-app time
         reminder to be functional.
@@ -89,12 +89,7 @@ const SetupAppScreen = () => {
       <Text style={[tw`text-sm bottom-6`, {color: '#858E9D'}]}>
         You can remove the permission anytime later.
       </Text>
-      <TouchableOpacity>
-        <Text style={[tw` text-center bottom-4`, {fontSize: 12, color: '#434C5B'}]}>
-          Are you having trouble granting overlay permission?
-          <Text style={tw`underline`}>Contact support via email.</Text>
-        </Text>
-      </TouchableOpacity>
+      
     </View>
   );
 };

@@ -24,25 +24,17 @@ const SmartPhone = () => {
       {/* Title */}
       <Text
         style={[
-          tw`font-medium text-center mb-4 top-20`,
+          tw`font-medium text-center mb-4 top-12`,
           {color: '#ECEDF0', fontSize: 18},
         ]}>
         Your smartphone can quickly become addictive in several ways:
       </Text>
       <Text
         style={[
-          tw` font-bold text-center mb-4 top-20 `,
-          {color: '#ECEDF0', fontSize: 18},
+          tw`font-normal text-center top-16`,
+          {color: '#AAAEB3', fontSize: 15},
         ]}>
-        Icons
-      </Text>
-      <Text
-        style={[
-          tw`font-medium text-center top-20 `,
-          {color: '#ECEDF0', fontSize: 15},
-        ]}>
-        The typical app icon is colorful. It’s designed to grab your attention
-        so that you open the app.
+        The app icons are colorful. They designed to grab your attention so that you open the app.
       </Text>
       {/* Image Section with Gradient Overlay */}
       <View style={tw`relative top-12`}>
@@ -62,28 +54,18 @@ const SmartPhone = () => {
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw`absolute text-center font-normal py-2 `,
-          {backgroundColor: 'rgba(31, 38, 48, 0.5)'},
-          {color: '#ECEDF0', fontSize: 15, bottom: 290},
-        ]}>
-        Consequently, your brain learns that opening colorful icons leads to
-        “interesting” (stimulating) content
-      </Text>
-      <Text
-        style={[
           tw`absolute text-center ml-4 py-2 font-normal `,
-          {color: '#ECEDF0', fontSize: 14, bottom: 180},
+          {color: '#AAAEB3', fontSize: 13, bottom: 150},
           {backgroundColor: 'rgba(31, 38, 48, 0.5)'},
         ]}>
-        Eventually, you open apps without conscious thought as your brain craves
-        stimulation - wondering later why you’re in an app you never planned to
-        open.
+      Consequently, your brain learns that opening colorful icons leads to
+      “interesting” (stimulating) content
       </Text>
 
       {/* pagination */}
       <View
         style={[
-          tw`flex-row justify-center items-center bottom-12 py-5 px-20`,
+          tw`flex-row justify-center items-center bottom-4 py-5 px-20`,
           {backgroundColor: '#1F263'},
         ]}>
         {[...Array(6)].map((_, index) => (
@@ -99,7 +81,7 @@ const SmartPhone = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',bottom:48},
+          {backgroundColor: '#29313C',bottom:20},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('SecondPage')}>
         <View style={tw`flex-row items-center`}>

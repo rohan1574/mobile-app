@@ -23,7 +23,7 @@ const Uninstall = () => {
       {/* Title */}
       <Text
         style={[
-          tw`font-bold text-center bottom-4 `,
+          tw`font-semi-bold text-center bottom-4 `,
           {color: '#ECEDF0', fontSize: 17},
         ]}>
         Don’t panic Uninstall. Use at least 7 days, You’re going to Love This
@@ -40,16 +40,16 @@ const Uninstall = () => {
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw` font-bold text-center top-8`,
-          {color: '#ECEDF0', fontSize: 15},
+          tw` font-semi-bold text-center top-8`,
+          {color: '#AAAEB3', fontSize: 15},
         ]}>
         Give it just one week, and you'll discover why this app is a
         game-changer.
       </Text>
       <Text
         style={[
-          tw` font-semibold text-center top-12`,
-          {color: '#ECEDF0', fontSize: 16},
+          tw` font-semi-bold text-center top-12`,
+          {color: '#AAAEB3', fontSize: 15},
         ]}>
         Next: we need a few permissions to make Minimal Life phone work the way
         it’s meant to
@@ -59,7 +59,7 @@ const Uninstall = () => {
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630',top:58}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630',top:70}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -85,7 +85,7 @@ const Uninstall = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',top:58},
+          {backgroundColor: '#29313C',top:70},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('SevenPage')}>
         <View style={tw`flex-row items-center`}>

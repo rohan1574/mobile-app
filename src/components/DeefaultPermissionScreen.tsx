@@ -51,15 +51,15 @@ const SetApps = () => {
         style={[
           tw` text-center font-medium `,
 
-          {color: '#ECEDF0', fontSize: 14},
+          {color: '#AAAEB3', fontSize: 14},
         ]}>
-       Last step before you can start using Minimal Life  Launcher - set it as your default home screen.
+       Last step - set it as your default home Launcher.
       </Text>
       <Text
         style={[
           tw` text-center top-20 font-medium `,
 
-          {color: '#ECEDF0', fontSize: 17},
+          {color: '#AAAEB3', fontSize: 17},
         ]}>
         CHOOSE APPS-{'>'} DEFAULT APPS-{'>'} HOME APP OR LAUNCHER AND SELECT MINIMAL LIFE PHONE
       </Text>
@@ -67,8 +67,8 @@ const SetApps = () => {
       {/* Button */}
       <TouchableOpacity
         style={[
-          tw`px-24 py-3 rounded-full flex-row items-center top-24`,
-          {backgroundColor: '#29313C'},
+          tw`px-24 py-3 rounded-full flex-row items-center `,
+          {backgroundColor: '#29313C',top:150},
         ]} onPress={() => navigation.navigate('TenPage')}>
         <Text style={[tw` text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
           Open settings
@@ -77,14 +77,9 @@ const SetApps = () => {
       </TouchableOpacity>
 
       {/* Footer */}
-
-      <TouchableOpacity>
-        <Text
-          style={[tw`text-center top-48`, {fontSize: 12, color: '#434C5B'}]}>
-          Are you having trouble granting overlay permission?
-          <Text style={tw`underline`}>Contact support via email.</Text>
-        </Text>
-      </TouchableOpacity>
+            <Text style={[tw`text-sm top-40`, {color: '#858E9D'}]}>
+              You can remove the permission anytime later.
+            </Text>
     </View>
   );
 };

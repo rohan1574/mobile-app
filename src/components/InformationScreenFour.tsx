@@ -3,8 +3,8 @@ import {View, Image, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import type {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
 type RootStackParamList = {
   FivePage: undefined; // Add other screens as needed
@@ -14,7 +14,7 @@ type RootStackParamList = {
 type NavigationProp = StackNavigationProp<RootStackParamList, 'FivePage'>;
 
 const TimeReminder = () => {
-   const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View
       style={[
@@ -27,12 +27,11 @@ const TimeReminder = () => {
           tw` font-semibold text-center mb-4 top-12`,
           {color: '#ECEDF0', fontSize: 16},
         ]}>
-        The in-app time reminder is now available to assist you.
+        The in-app time reminder
       </Text>
-      <Text style={[tw` text-center top-12`, {color: '#ECEDF0', fontSize: 15}]}>
+      <Text style={[tw` text-center top-12`, {color: '#AAAEB3', fontSize: 15}]}>
         Avoid getting lost in endless scrolling. Before using an addictive app,
-        set a time limit for yourself, and receive a reminder when your time is
-        up.
+        set an estimate time limit.
       </Text>
 
       {/* Image Section with Gradient Overlay */}
@@ -54,18 +53,16 @@ const TimeReminder = () => {
       <Text
         style={[
           tw`absolute bottom-40 text-center  font-normal `,
-          {color: '#ECEDF0', fontSize: 15},
+          {color: '#AAAEB3', fontSize: 16},
         ]}>
-        The in-app time reminder is automatically enabled for games, social
-        media, and similar applications. However, you can customize these
-        settings according to your preferences.
+        Enable Reminder for games, social media, and addictive apps. And choose Remind or Quit option.
       </Text>
 
       {/* pagination */}
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630',bottom:28}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630', bottom: 12}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -90,9 +87,10 @@ const TimeReminder = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',bottom:35},
+          {backgroundColor: '#29313C', bottom: 15},
         ]}
-        activeOpacity={0.8} onPress={() => navigation.navigate('FivePage')}>
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('FivePage')}>
         <View style={tw`flex-row items-center`}>
           <Text style={[tw` text-lg font-medium`, {color: '#ECEDF0'}]}>
             Next

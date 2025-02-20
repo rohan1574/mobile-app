@@ -32,7 +32,7 @@ const SetupApp = () => {
           <View
             key={num}
             style={[
-              tw`h-10 w-10 rounded-full flex items-center justify-center mx-2`,
+              tw`h-10 w-10 rounded-full flex items-center justify-center mx-4`,
               {
                 backgroundColor: '#1F2630',
                 borderWidth: 1,
@@ -65,9 +65,9 @@ const SetupApp = () => {
       {/* Permission Text */}
       <Text
         style={[
-          tw`absolute  text-center  font-semibold `,
+          tw`absolute text-center font-semibold `,
 
-          {color: '#ECEDF0', fontSize: 14, bottom: 300},
+          {color: '#AAAEB3', fontSize: 15, bottom: 300},
         ]}>
         Minimal Life phone needs permission to display content over other apps
         to allow the in-app time reminder to work
@@ -83,7 +83,7 @@ const SetupApp = () => {
           <Text
             style={[
               tw`text-base font-normal text-start`,
-              {color: '#ECEDF0'},
+              {color: '#AAAEB3'},
             ]}>
             Press button below and find Minimal Life phone.
           </Text>
@@ -96,7 +96,7 @@ const SetupApp = () => {
           <Text
             style={[
               tw`text-base font-normal text-start `,
-              {color: '#ECEDF0'},
+              {color: '#AAAEB3'},
             ]}>
             Activate slider next time to Minimal Life phone.
           </Text>
@@ -119,13 +119,6 @@ const SetupApp = () => {
       <Text style={[tw`text-sm bottom-6`, {color: '#858E9D'}]}>
         You can remove the permission anytime later.
       </Text>
-      <TouchableOpacity>
-        <Text
-          style={[tw`bottom-2 text-center`, {fontSize: 12, color: '#434C5B'}]}>
-          Are you having trouble granting overlay permission?
-          <Text style={tw`underline`}>Contact support via email.</Text>
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };

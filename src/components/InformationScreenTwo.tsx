@@ -24,17 +24,17 @@ const RectangleScreen = () => {
       {/* Title */}
       <Text
         style={[
-          tw` font-bold text-center mb-4  top-12`,
+          tw` font-bold text-center mb-4  top-8`,
           {color: '#ECEDF0', fontSize: 18},
         ]}>
         No icons on Minimal Life phone
       </Text>
       <Text
         style={[
-          tw` font-semi-bold text-center top-16`,
-          {color: '#ECEDF0', fontSize: 16},
+          tw`font-semi-bold text-center top-16`,
+          {color: '#AAAEB3', fontSize: 16},
         ]}>
-        Apps are shown not just as text with their names.
+        Apps are shown by name with usage data
       </Text>
 
       {/* Image Section with Gradient Overlay */}
@@ -55,18 +55,17 @@ const RectangleScreen = () => {
       {/* Description text at the bottom of the image */}
       <Text
         style={[
-          tw`absolute bottom-36 text-center ml-4  font-normal `,
-          {color: '#ECEDF0', fontSize: 15, backgroundColor: '#1F2630'},
+          tw`absolute text-center ml-4 font-normal`,
+          {color: '#AAAEB3', fontSize: 15, bottom:150},
         ]}>
-        This discourages mindless app usage by requiring you to consciously
-        identify the app before choosing to open it.
+        The data push to think before you intend to open an addictive apps/games.
       </Text>
 
       {/* pagination */}
       <View
         style={[
           tw`flex-row justify-center items-center py-5 px-20`,
-          {backgroundColor: '#1F2630',bottom:8}, // সঠিক ব্যাকগ্রাউন্ড রঙ
+          {backgroundColor: '#1F2630'}, // সঠিক ব্যাকগ্রাউন্ড রঙ
         ]}>
         {[...Array(6)].map((_, index) => (
           <View key={index} style={tw`mx-1`}>
@@ -92,7 +91,7 @@ const RectangleScreen = () => {
       <TouchableOpacity
         style={[
           tw`w-full bg-blue-500 py-3 rounded-full items-center`,
-          {backgroundColor: '#29313C',bottom:10},
+          {backgroundColor: '#29313C'},
         ]}
         activeOpacity={0.8} onPress={() => navigation.navigate('ThirdPage')}>
         <View style={tw`flex-row items-center`}>
