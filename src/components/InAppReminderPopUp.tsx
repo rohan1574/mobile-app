@@ -17,7 +17,7 @@ const InAppReminderPopUp = () => {
         {/* Quick Time Buttons */}
         <View style={tw`flex-row flex-wrap justify-between mb-4`}>
           {['2 min', '5 min', '10 min', '15 min'].map((time, index) => (
-            <TouchableOpacity key={index} style={tw`w-32 bg-gray-700 p-3 rounded-lg mb-2 items-center`}>
+            <TouchableOpacity key={index} style={[tw`py-2 bg-gray-400 rounded-full mb-2 items-center`,{width:140}]}>
               <Text style={tw`text-white text-base`}>{time}</Text>
             </TouchableOpacity>
           ))}
@@ -29,10 +29,10 @@ const InAppReminderPopUp = () => {
             value={time}
             onChangeText={setTime}
             keyboardType="numeric"
-            style={tw`text-white text-xl text-center border-b border-white w-16 mr-2`}
+            style={tw`text-gray-400 text-lg text-center border-b border-gray-400 w-12`}
           />
-          <Text style={tw`text-white text-lg`}>min</Text>
-          <TouchableOpacity style={tw`bg-gray-500 px-4 py-2 left-6 rounded-lg self-center`}>
+          <Text style={tw`text-gray-400 text-lg`}>min</Text>
+          <TouchableOpacity style={[tw`py-2 bg-gray-400 rounded-full mb-2 items-center left-8`,{width:140}]}>
           <Text style={tw`text-white text-base `}>Use {time} min</Text>
         </TouchableOpacity>
         </View>
