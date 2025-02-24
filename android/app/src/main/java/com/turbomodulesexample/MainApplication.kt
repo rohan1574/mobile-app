@@ -15,7 +15,8 @@ import com.facebook.soloader.SoLoader
 import com.turbomodulesexample.NativeLocalStoragePackage
 import com.turbomodulesexample.NativeInstalledAppsPackage
 import com.turbomodulesexample.NativeAppScreenTimePackage
-import com.turbomodulesexample.NativeBatteryStatusPackage // Import the new package
+import com.turbomodulesexample.NativeBatteryStatusPackage
+import com.turbomodulesexample.NativePermissionsPackage // Import the new package
 
 class MainApplication : Application(), ReactApplication {
 
@@ -26,7 +27,8 @@ class MainApplication : Application(), ReactApplication {
               add(NativeLocalStoragePackage())
               add(NativeInstalledAppsPackage())
               add(NativeAppScreenTimePackage())
-              add(NativeBatteryStatusPackage()) // Add the new package here
+              add(NativeBatteryStatusPackage())
+              add(NativePermissionsPackage()) // Add the new package here
             }
 
         override fun getJSMainModuleName(): String = "index"

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import NativePermissions from '../../specs/NativePermissions';
 
 type RootStackParamList = {
   EightPage: undefined; // Add other screens as needed
@@ -15,6 +16,9 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'EightPage'>;
 
 const SetupApp = () => {
   const navigation = useNavigation<NavigationProp>();
+
+  const [orverlay, setOverlay] = useState(false);
+
   return (
     <View
       style={[
@@ -103,17 +107,29 @@ const SetupApp = () => {
         </View>
       </View>
 
-      {/* Button */}
-      <TouchableOpacity
-        style={[
-          tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,
-          {backgroundColor: '#29313C'},
-        ]} onPress={() => navigation.navigate('EightPage')}>
-        <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
-          Open overlay settings
-        </Text>
-        <Icon name="arrow-forward" size={20} color="#ECEDF0" />
-      </TouchableOpacity>
+      {
+        orverlay ?
+        <TouchableOpacity
+          style={[
+            tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,
+            {backgroundColor: '#29313C'},
+          ]} onPress={() => navigation.navigate('EightPage')}>
+          <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
+            Aleady done!
+          </Text>
+          <Icon name="arrow-forward" size={20} color="#ECEDF0" />
+        </TouchableOpacity> :
+        <TouchableOpacity
+          style={[
+            tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,
+            {backgroundColor: '#29313C'},
+          ]} onPress={() => NativePermissions.requestOverlayPermission()}>
+          <Text style={[tw`text-base font-bold mr-2 `, {color: '#ECEDF0'}]}>
+            Open overlay settings
+          </Text>
+          <Icon name="arrow-forward" size={20} color="#ECEDF0" />
+        </TouchableOpacity>
+      }
 
       {/* Footer */}
       <Text style={[tw`text-sm bottom-6`, {color: '#858E9D'}]}>
