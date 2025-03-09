@@ -16,8 +16,24 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'EightPage'>;
 
 const SetupApp = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [hasPermission, setHasPermission] = useState(false);
 
-  const [orverlay, setOverlay] = useState(false);
+  const checkPermission = async () => {
+    const permission = await NativePermissions.checkOverlayPermission();
+    setHasPermission(permission);
+  };
+
+  useEffect(() => {
+    if (hasPermission) return;
+
+    checkPermission();
+
+    const interval = setInterval(() => {
+      checkPermission();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [hasPermission]);
 
   return (
     <View
@@ -108,7 +124,7 @@ const SetupApp = () => {
       </View>
 
       {
-        orverlay ?
+        hasPermission ?
         <TouchableOpacity
           style={[
             tw`px-16 py-3 rounded-full flex-row items-center bottom-8`,

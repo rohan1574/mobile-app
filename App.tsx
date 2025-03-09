@@ -12,7 +12,7 @@ import Notifications from './src/components/InformationScreenFive';
 import Uninstall from './src/components/InformationScreenSix';
 import SetupApp from './src/components/OverlayPermissionScreen';
 import SetupAppScreen from './src/components/UsagePermissionScreen';
-import SetApps from './src/components/DeefaultPermissionScreen';
+import SetApps from './src/components/DefaultPermissionScreen';
 import Premium from './src/components/Premium';
 import HomeScreen from './src/components/DefaultHomeScreen';
 import Applist from './src/components/AllAppListByAlphabetScreen';
