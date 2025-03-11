@@ -17,7 +17,11 @@ import Premium from './src/components/Premium';
 import HomeScreen from './src/components/DefaultHomeScreen';
 import Applist from './src/components/AllAppListByAlphabetScreen';
 
-const RootStack = createNativeStackNavigator({
+import NativeLocalStorage from './specs/NativeLocalStorage';
+
+
+
+const InitialStack = createNativeStackNavigator({
   initialRouteName: 'GetStarted',
   screenOptions: {
     headerShown: false,
@@ -40,8 +44,25 @@ const RootStack = createNativeStackNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(RootStack);
+const GetStart = createStaticNavigation(InitialStack);
+
+const HomeStack = createNativeStackNavigator({
+  initialRouteName: 'HomePage',
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    HomePage: HomeScreen,
+    AppListPage: Applist,
+  },
+});
+
+const Home = createStaticNavigation(HomeStack);
 
 export default function App() {
-  return <Navigation />;
+  if( NativeLocalStorage?.getItem('homeReady') == 'yes' ){
+    return <Home />;
+  } else {
+    return <GetStart />;
+  }
 }

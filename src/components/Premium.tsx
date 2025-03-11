@@ -4,6 +4,7 @@ import {s as tw} from 'react-native-wind';
 import Icon from 'react-native-vector-icons/Ionicons';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import NativeLocalStorage from '../../specs/NativeLocalStorage';
 
 type RootStackParamList = {
   ElevenPage: undefined; // Add other screens as needed
@@ -14,6 +15,12 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'ElevenPage'>;
 
 const Premium = () => {
   const navigation = useNavigation<NavigationProp>();
+
+  const getHomeScreen = () => {
+    NativeLocalStorage?.setItem('yes', 'homeReady');
+    navigation.navigate('ElevenPage');
+  }
+
   return (
     <View
       style={[
@@ -23,8 +30,10 @@ const Premium = () => {
      
       {/* Permission Text */}
     
-        <Text style={[tw`font-medium px-24 py-4 rounded-full `, {color: '#ECEDF0',backgroundColor: '#29313C'}]} onPress={() => navigation.navigate('ElevenPage')}>
-        Get Premium Now
+        <Text
+          style={[tw`font-medium px-24 py-4 rounded-full `, {color: '#ECEDF0',backgroundColor: '#29313C'}]}
+          onPress={() => getHomeScreen()}>
+          Get Premium Now
         </Text>
       <Text
         style={[
@@ -41,8 +50,10 @@ const Premium = () => {
           tw` rounded-full flex-row items-center top-24`,
           
         ]}>
-        <Text style={[tw`font-bold mr-2 underline bottom-1`,{color: '#ECEDF0',fontSize:17}]}>
-        Let my try
+        <Text
+          style={[tw`font-bold mr-2 underline bottom-1`,{color: '#ECEDF0',fontSize:17}]}
+          onPress={() => getHomeScreen()}>
+          Let my try
         </Text>
         <Icon name="arrow-forward" size={20} color="#ECEDF0"  />
       </TouchableOpacity>    
