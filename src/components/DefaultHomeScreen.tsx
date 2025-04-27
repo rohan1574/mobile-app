@@ -33,6 +33,7 @@ const HomeScreen = () => {
   const fetchInstalledApps = async () => {
     try {
       const apps = await NativeInstalledApps.getInstalledApps();
+      console.log(apps);
       setAppList(apps);
     } catch (error) {
       console.error('Error fetching installed apps:', error);

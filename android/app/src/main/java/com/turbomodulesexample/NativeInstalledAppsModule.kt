@@ -21,9 +21,15 @@ class NativeInstalledAppsModule(reactContext: ReactApplicationContext) : NativeI
     val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
     val appsList: WritableArray = Arguments.createArray()
 
+    val excludeApps = arrayOf(
+      "YouTube","Google","Download Manager","Messages","Sounds","Personal Safety","Downloads","Google Play Store","Android Accessibility Suite","Camera","SIM Toolkit","Clock","Gmail","Bluetooth","Digital Wellbeing","Phone","Drive","Maps","Contacts","Chrome","Photos","Calendar","Files","Settings","YouTube Music","Gboard"
+    )
+
     for (packageInfo in packages) {
       if( (packageInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0 ){
-        continue;
+        if (pm.getApplicationLabel(packageInfo).toString() !in excludeApps) {
+          continue;
+        }
       }
 
       val app: WritableMap = Arguments.createMap()
