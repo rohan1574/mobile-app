@@ -1,44 +1,55 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { s as tw } from 'react-native-wind';
+import {s as tw} from 'react-native-wind';
 
 const InAppReminderPopUp = () => {
-  const [time, setTime] = useState('26');
+
 
   return (
-    <View style={tw`flex-1 bg-gray-900 p-4`}>
-      {/* Timer Modal */}
-      <View style={tw`absolute top-1/4 left-5 right-5 bg-gray-800 rounded-xl p-4 items-center`}>
-        <Icon name="alert-circle-outline" size={40} color="yellow" style={tw`mb-2`} />
-        <Text style={tw`text-yellow-400 text-lg font-semibold mb-2`}>⚠️ Time Up! 00.00</Text>
-        <Text style={tw`text-white text-base mb-4`}>Please, Let me use another_</Text>
-
-        {/* Quick Time Buttons */}
-        <View style={tw`flex-row flex-wrap justify-between mb-4`}>
-          {['2 min', '5 min', '10 min', '15 min'].map((time, index) => (
-            <TouchableOpacity key={index} style={[tw`py-2 bg-gray-400 rounded-full mb-2 items-center`,{width:140}]}>
-              <Text style={tw`text-white text-base`}>{time}</Text>
-            </TouchableOpacity>
-          ))}
+    <View style={tw`flex-1 bg-gray-500 p-4`}>
+      <View
+        style={[tw`bg-gray-900 justify-center top-40 rounded-lg items-center `,{height:430}]}>
+        {/* Time Up Warning */}
+        <View style={tw`flex-row items-center mb-2`}>
+          <Icon name="warning-outline" size={20} color="#facc15" />
+          <Text style={tw`text-yellow-400 text-lg font-semibold ml-1`}>
+            Time Up!
+          </Text>
+          <Text style={tw`text-white text-base ml-2`}>00.00</Text>
         </View>
 
-        {/* Custom Time Input */}
-        <View style={tw`flex-row items-center justify-center mb-4`}>
-          <TextInput
-            value={time}
-            onChangeText={setTime}
-            keyboardType="numeric"
-            style={tw`text-gray-400 text-lg text-center border-b border-gray-400 w-12`}
-          />
-          <Text style={tw`text-gray-400 text-lg`}>min</Text>
-          <TouchableOpacity style={[tw`py-2 bg-gray-400 rounded-full mb-2 items-center left-8`,{width:140}]}>
-          <Text style={tw`text-white text-base `}>Use {time} min</Text>
+        {/* Subtext */}
+        <Text style={tw`text-gray-300 text-base mb-6`}>
+          Please, Let me use another_
+        </Text>
+
+        {/* Grid Buttons */}
+        <View style={tw`flex-row flex-wrap justify-between mx-4`}>
+          {['2 min', '5 min', '10 min', '15 min', '20 min', '30 min'].map(
+            (time, index) => (
+              <TouchableOpacity
+                key={index}
+                style={tw`w-36 py-2 bg-gray-400 rounded-full mb-2 items-center`}>
+                <Text style={[tw`text-base`, {color: '#ECEDF0'}]}>{time}</Text>
+              </TouchableOpacity>
+            ),
+          )}
+        </View>
+
+        {/* Divider */}
+        <View style={tw`border-t border-gray-500 w-full my-6`} />
+
+        {/* Quit Button */}
+        <TouchableOpacity style={tw`bg-gray-600  py-3 rounded-full w-80`}>
+          <Text style={tw`text-white text-center text-base`}>Quit</Text>
         </TouchableOpacity>
-        </View>
-
-        {/* Use Custom Time Button */}
-        
       </View>
     </View>
   );

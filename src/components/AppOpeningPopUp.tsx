@@ -10,8 +10,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {s as tw} from 'react-native-wind';
 
 const AppOpeningPopUp = () => {
-  const [time, setTime] = useState('55');
   const [showCustomTime, setShowCustomTime] = useState(false); // Toggle state
+  const [selectedOption, setSelectedOption] = useState('remind');
+  const [secondWarning, setSecondWarning] = useState(true);
 
   return (
     <View style={[tw`flex-1 p-4`, {backgroundColor: '#1F2630'}]}>
@@ -65,7 +66,7 @@ const AppOpeningPopUp = () => {
       {/* Timer Modal */}
       <View
         style={[
-          tw`absolute right-5 rounded-xl p-4`,
+          tw`absolute left-4 rounded-xl p-4`,
           {top: 262, backgroundColor: '#29313C'},
         ]}>
         <Text
@@ -78,7 +79,7 @@ const AppOpeningPopUp = () => {
 
         {/* Quick Time Buttons */}
         <View style={tw`flex-row flex-wrap justify-between`}>
-          {['2 min', '5 min', '10 min', '15 min'].map((time, index) => (
+          {['2 min', '5 min', '10 min', '15 min','20 min','30 min'].map((time, index) => (
             <TouchableOpacity
               key={index}
               style={tw`w-36 py-2 bg-gray-400 rounded-full mb-2 items-center`}>
@@ -87,7 +88,6 @@ const AppOpeningPopUp = () => {
           ))}
         </View>
 
-      
         {/* Toggle Icon (একই আইকন দিয়ে সব টগল হবে) */}
         <TouchableOpacity
           onPress={() => setShowCustomTime(!showCustomTime)}
@@ -102,44 +102,71 @@ const AppOpeningPopUp = () => {
         {/* Custom Time Input এবং Time Over Options (একসাথে দেখানো হবে) */}
         {showCustomTime && (
           <>
-            {/* Custom Time Input */}
-            <View style={tw`flex-row items-center justify-center mb-4`}>
-              <TextInput
-                value={time}
-                onChangeText={setTime}
-                keyboardType="numeric"
-                style={tw`text-gray-400 text-lg text-center border-b border-gray-400 w-12`}
-              />
-              <Text style={tw`text-gray-400 text-lg mr-8`}>min</Text>
+            {/* Time Over Options */}
+            <View style={[tw` p-6 rounded-lg w-full max-w-md`,{backgroundColor: '#29313C'}]}>
+              <Text style={tw`text-white text-lg font-medium mb-4 text-center`}>
+                When time is over
+              </Text>
+
+              {/* Mindful Delay */}
               <TouchableOpacity
-                style={tw`w-36 py-2 bg-gray-400 rounded-full mb-2 items-center left-4`}>
-                <Text style={tw`text-white text-base`}>Use {time} min</Text>
+                style={tw`flex-row items-center mb-4`}
+                onPress={() => setSelectedOption('delay')}>
+                <Icon
+                  name={
+                    selectedOption === 'delay'
+                      ? 'radio-button-on'
+                      : 'radio-button-off'
+                  }
+                  size={20}
+                  color="#fff"
+                />
+                <Text style={tw`text-white ml-2`}>Mindful Delay</Text>
+              </TouchableOpacity>
+
+              {/* Remind Me */}
+              <TouchableOpacity
+                style={tw`flex-row items-center mb-4`}
+                onPress={() => setSelectedOption('remind')}>
+                <Icon
+                  name={
+                    selectedOption === 'remind'
+                      ? 'radio-button-on'
+                      : 'radio-button-off'
+                  }
+                  size={20}
+                  color="#fff"
+                />
+                <Text style={tw`text-white ml-2 mr-2`}>Remind Me</Text>
+                <TouchableOpacity
+                  onPress={() => setSecondWarning(!secondWarning)}>
+                  <View style={tw`flex-row items-center`}>
+                    <Icon
+                      name={secondWarning ? 'checkbox' : 'square-outline'}
+                      size={20}
+                      color="#fff"
+                    />
+                    <Text style={tw`text-white ml-2`}>With 2nd Waring</Text>
+                  </View>
+                </TouchableOpacity>
+              </TouchableOpacity>
+
+              {/* Quit */}
+              <TouchableOpacity
+                style={tw`flex-row items-center`}
+                onPress={() => setSelectedOption('quit')}>
+                <Icon
+                  name={
+                    selectedOption === 'quit'
+                      ? 'radio-button-on'
+                      : 'radio-button-off'
+                  }
+                  size={20}
+                  color="#fff"
+                />
+                <Text style={tw`text-white ml-2`}>Quit</Text>
               </TouchableOpacity>
             </View>
-
-            {/* Time Over Options */}
-            <Text style={tw`text-gray-400 font-normal left-4 text-lg mb-2`}>When time is over</Text>
-            <TouchableOpacity style={tw`flex-row items-center mb-2 left-12`}>
-              <Icon
-                name="radio-button-off"
-                size={20}
-                color="gray"
-                style={tw`mr-2`}
-              />
-              <Text style={tw`text-gray-400 text-base`}>
-                Exit app when time is over
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={tw`flex-row items-center left-12`}>
-              <Icon
-                name="radio-button-on"
-                size={20}
-                color="gray"
-                style={tw`mr-2`}
-              />
-              <Text style={tw`text-gray-400 text-base`}>Only remind</Text>
-            </TouchableOpacity>
           </>
         )}
       </View>
@@ -148,3 +175,4 @@ const AppOpeningPopUp = () => {
 };
 
 export default AppOpeningPopUp;
+ 
