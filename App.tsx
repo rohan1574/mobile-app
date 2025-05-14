@@ -1,83 +1,68 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {Circle, Svg} from 'react-native-svg';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {s as tw} from 'react-native-wind';
+import * as React from 'react';
+import {createStaticNavigation, useNavigation} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const ProgressCircle = ({progress = 30}) => {
-  const radius = 70;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+import GetStartedScreen from './src/components/SplashScreenOne';
+import WelcomeScreen from './src/components/SplashScreenTwo';
+import StartPageFirstScreen from './src/components/InformationScreenOne';
+import RectangleScreen from './src/components/InformationScreenTwo';
+import InfiniteScreen from './src/components/InformationScreenThree';
+import TimeReminder from './src/components/InformationScreenFour';
+import Notifications from './src/components/InformationScreenFive';
+import Uninstall from './src/components/InformationScreenSix';
+import SetupApp from './src/components/OverlayPermissionScreen';
+import SetupAppScreen from './src/components/UsagePermissionScreen';
+import SetApps from './src/components/DefaultPermissionScreen';
+import Premium from './src/components/Premium';
+import HomeScreen from './src/components/DefaultHomeScreen';
+import Applist from './src/components/AllAppListByAlphabetScreen';
 
-  return (
-    // এখানে return যোগ করুন
-    <View style={tw`items-center justify-center`}>
-      <Svg height="160" width="160" viewBox="0 0 160 160">
-        {/* Background Circle */}
-        <Circle
-          cx="80"
-          cy="80"
-          r={radius}
-          stroke="#E0E0E0"
-          strokeWidth="12"
-          fill="transparent"
-        />
-        {/* Progress Circle */}
-        <Circle
-          cx="80"
-          cy="80"
-          r={radius}
-          stroke="#3B82F6"
-          strokeWidth="12"
-          fill="transparent"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          rotation="-90"
-          origin="80, 80"
-        />
-      </Svg>
-      <Text style={tw`absolute text-2xl font-bold text-blue-600`}>
-        {progress}s
-      </Text>
-    </View>
-  );
-};
+import NativeLocalStorage from './specs/NativeLocalStorage';
 
-const RemindMeYesWaitPopUp = () => {
-  return (
-    <View style={tw`flex-1 bg-gray-500 p-4`}>
-      <View
-        style={[
-          tw`bg-gray-700 justify-center top-40 rounded-lg items-center `,
-          {height: 430},
-        ]}>
-        {/* Main Alert */}
-        <Text style={tw`text-gray-600 text-base mb-2`}>
-          Opening in 10 seconds
-        </Text>
-        {/* Recommendation */}
-        <Text style={tw`text-gray-600 text-sm mb-4`}>
-          This is a mindful practice to re-think, and quit addictive apps
-        </Text>
-        {/* Timer Circle */}
-        <ProgressCircle progress={30} />
 
-        {/* Quit Button */}
-        <TouchableOpacity style={tw`bg-gray-600  py-3 rounded-full w-80`}>
-          <Text style={tw`text-white text-center text-base`}>
-            mind changed, Quit
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
 
-export default RemindMeYesWaitPopUp;
+const InitialStack = createNativeStackNavigator({
+  initialRouteName: 'GetStarted',
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    GetStarted: GetStartedScreen,
+    WelcomeScreen: WelcomeScreen,
+    StartPageFirst: StartPageFirstScreen,
+    SecondPage: RectangleScreen,
+    ThirdPage: InfiniteScreen,
+    FourPage: TimeReminder,
+    FivePage: Notifications,
+    SixPage: Uninstall,
+    SevenPage: SetupApp,
+    EightPage: SetupAppScreen,
+    NinePage: SetApps,
+    TenPage: Premium,
+    ElevenPage: HomeScreen,
+    TwelvePage: Applist,
+  },
+});
+
+const GetStart = createStaticNavigation(InitialStack);
+
+const HomeStack = createNativeStackNavigator({
+  initialRouteName: 'HomePage',
+  screenOptions: {
+    headerShown: false,
+  },
+  screens: {
+    HomePage: HomeScreen,
+    AppListPage: Applist,
+  },
+});
+
+const Home = createStaticNavigation(HomeStack);
+
+export default function App() {
+  if( NativeLocalStorage?.getItem('homeReady') == 'yes' ){
+    return <Home />;
+  } else {
+    return <GetStart />;
+  }
+}
